@@ -1,0 +1,116 @@
+                                                                                 local v0=loadstring(  
+                                                                        game:HttpGet(                                   
+                                                                                                                                  
+                                                                "https://raw.githubusercontent.com/shlexware/Orion/main/source"))();    
+                                                            local v1=v0:MakeWindow({Name="Sterling Hub",HidePremium=false});local v2=v1:  
+                                                          MakeTab({Name="Stat Node",Icon="rbxassetid://4483345998",PremiumOnly=false});     
+                                                        local v3=v2:AddSection({Name="Unlock Move"});local v4="";v3:AddTextbox({Name=         
+                                                      "Enter Move Name",Default="Tool Manipulation: Wind Scythe",TextDisappear=false,Callback=  
+                                                    function(v48) v4=v48;end});v3:AddButton({Name="Redeem Move",Callback=function() if (v4 and (  
+                                                  v4~="")) then local v118=0 + 0 ;while true do if (v118==(14 -(9 + 5))) then game:GetService(      
+                                                  "ReplicatedStorage").Remotes.Server.Data.UnlockStatNode:InvokeServer(v4);v0:MakeNotification({Name= 
+                                                "Move Redeemed",Content="You have redeemed: "   .. v4 ,Image="rbxassetid://4483345998",Time=2 + 3 });   
+                                                break;end end else v0:MakeNotification({Name="Error",Content="Please enter a valid stat node.",Image=     
+                                              "rbxassetid://4483345998",Time=381 -(85 + 291) });end end});local v5=v1:MakeTab({Name="Main",Icon=            
+                                              "rbxassetid://4483345998",PremiumOnly=false});local v6={type="Exorcise",set="Shijo Town Set",rewards={essence 
+                                            =1290 -(243 + 1022) ,chestMeter=285 -210 ,exp=6599715 + 1400285 ,cash=51322 -(1249 + 73) },rewardsText=           
+                                            "$50000 | 8000000 EXP | 25 Mission Essence",difficulty=1183 -(1123 + 57) ,title="Exorcise",amount=1146 -(466 + 679) 
+                                           ,level=342 + 78 ,grade="Non Sorcerer",subtitle="5 Cursed Spirits"};local v7=v5:AddSection({Name="Quest Loop"});local   
+                                          v8=false;local function v9() while v8 do local v108=0 -0 ;local v109;while true do if (v108==2) then wait(257 -(163 + 91) 
+                                           );game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.J,false,game);v108=3;end if (v108==(1930 -(1869 +  
+                                          61))) then game:GetService("ReplicatedStorage").Remotes.Server.Data.TakeQuest:InvokeServer(v6);wait(1 + 2 );v108=1 + 0 ;end 
+                                         if (v108==(10 -7)) then wait(7 -2 );break;end if (v108==(1 + 0)) then v109=workspace.Objects.Portals.Missions;if (v109 and     
+                                        v109:IsA("Part")) then local v154=game:GetService("Players").         --[[==============================]]LocalPlayer.Character;  
+                                        if v154 then v154:SetPrimaryPartCFrame(v109.CFrame);end end --[[============================================]] v108=2 -0 ;end end 
+                                         end end v7:AddToggle({Name="Farm Level(Insta Levels)", --[[======================================================]]Default=false,  
+                                      Callback=function(v49) v8=v49;if v8 then v9();end end --[[==========================================================]]});local function 
+                                       v10() for v110,v111 in pairs(workspace.Objects.    --[[==============================================================]]Drops:          
+                                      GetChildren()) do if (v111:IsA("Model") and (v111.  --[[================================================================]]Name:sub(1 + 0  
+                                      ,5)=="Chest")) then local v123=0;local v124;while   --[[==================================================================]]true do if (  
+                                      v123==(1474 -(1329 + 145))) then v124=v111:         --[[==================================================================]]                  
+                                    FindFirstChildOfClass("ProximityPrompt");if v124 then --[[====================================================================]] if v124.     
+                    Enabled then local v171=971 -(140 + 831) ;while true do if (v171==0)  --[[====================================================================]]then game:      
+              GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.E,false,   --[[======================================================================]]game);wait(   
+            1851 -(1409 + 441) );break;end end end end break;end end end end end local    --[[======================================================================]]v11=false;    
+          local function v12(v50) local v51=718 -(15 + 703) ;while true do if (v51==(0 +  --[[======================================================================]]0)) then v11= 
+        v50;if v11 then while v11 do local v155=438 -(262 + 176) ;while true do if (v155  --[[======================================================================]]==(103 -(17 + 
+         86))) then v10();wait(1);break;end end end end break;end end end local function  --[[======================================================================]]v13() local   
+      v52=1721 -(345 + 1376) ;local v53;while true do if (v52==(688 -(198 + 490))) then   --[[======================================================================]]v53=game:     
+      GetService("Players").LocalPlayer.ReplicatedData:WaitForChild("masteries");for v135,  --[[==================================================================]]v136 in ipairs( 
+      v53:GetChildren()) do if v136:IsA("Folder") then local v156=v136:FindFirstChild(      --[[================================================================]]"level");if v156  
+    then v156.Value=1115 -615 ;end end end break;end end end local function v14() local v54 --[[==============================================================]]=0;local v55;     
+    while true do if (v54==0) then v55=game:GetService("ReplicatedStorage"):WaitForChild(     --[[==========================================================]]"Skills");for v137, 
+    v138 in ipairs(v55:GetChildren()) do if v138:IsA("Folder") then local v157=0 -0 ;local v158 --[[====================================================]];while true do if ((0 - 
+    0)==v157) then v158=v138:FindFirstChild("Cooldown");if v158 then v158.Value=0;end break;end   --[[==============================================]]end end end break;end end 
+     end local function v15() local v56=0 -0 ;local v57;while true do if (v56==(0 -0)) then v57=game: --[[====================================]]GetService(                   
+    "ReplicatedStorage"):WaitForChild("Skills");for v139,v140 in ipairs(v57:GetChildren()) do if v140:IsA --[[========================]]("Folder") then local v159=v140:      
+    FindFirstChild("Cooldown");if v159 then v159.Value=9 + 1 ;end end end break;end end end local function v16(v58) local v59=1206 -(696 + 510) ;local v60;local v61;local  
+  v62;while true do if (v59==(1 -0)) then if  not v61 then return;end v62=workspace.Objects.Mobs:GetChildren();v59=2;end if ((65 -(30 + 35))==v59) then v60=game:         
+  GetService("Players").LocalPlayer;v61=v60.Character;v59=1 + 0 ;end if (v59==(3 -1)) then for v141,v142 in ipairs(v62) do if (v142:IsA("Model") and v142:              
+  FindFirstChild("Humanoid")) then local v160=1257 -(1043 + 214) ;local v161;local v162;while true do if (v160==(1262 -(1091 + 171))) then v161=v142:FindFirstChild(      
+  "Humanoid");v162=(v61.HumanoidRootPart.Position-v142.HumanoidRootPart.Position).Magnitude;v160=1 + 0 ;end if (v160==(3 -2)) then if (v162<=v58) then v161.Health=0 -0 ; 
+  end break;end end end end break;end end end local function v17() local v63=374 -(123 + 251) ;local v64;local v65;local v66;local v67;while true do if (v63==(580 -(361  
+  + 219))) then v64={"77102528","77102481","77103458","259500454"};v65=game:GetService("Players").LocalPlayer;v63=837 -(660 + 176) ;end if (v63==(1 + 0)) then v66=v65:   
+  WaitForChild("ReplicatedData");v67=v66:WaitForChild("gamepasses");v63=7 -5 ;end if (v63==(204 -(14 + 188))) then for v143,v144 in ipairs(v64) do local v145=0 + 0 ;     
+  local v146;while true do if (v145==(850 -(20 + 830))) then v146=v67:FindFirstChild(v144);if  not v146 then v146=Instance.new("BoolValue");v146.Name=v144;v146.Value=    
+  true;v146.Parent=v67;print("Inserted BoolValue for game pass with ID:",v144);else print("BoolValue for game pass with ID already exists:",v144);end break;end end end   
+  break;end end end local v18=v5:AddSection({Name="Instakill Mobs"});local v19=0 + 0 ;v18:AddSlider({Name="Set Range for Instakill",Min=0,Max=1675 -(534 + 141) ,Default= 
+  0 + 0 ,Callback=function(v68) local v69=738 -(542 + 196) ;while true do if (v69==(0 -0)) then v19=v68;print("Selected range: "   .. v19 );break;end end end});local v20 
+  =false;local v21;v18:AddToggle({Name="Enable Instakill",Default=false,Callback=function(v70) v20=v70;if v20 then v21=game:GetService("RunService").Heartbeat:Connect(     
+  function() v16(v19);end);elseif v21 then v21:Disconnect();end end});local v22=false;local v23;local function v24(v71) local v72=game:GetService("Players").LocalPlayer;   
+  local v73=v72.Character;if  not v73 then return;end local v74;local v75=math.huge;local v76=workspace.Objects.Mobs:GetChildren();for v112,v113 in ipairs(v76) do if (v113 
+  :IsA("Model") and v113:FindFirstChild("Humanoid")) then local v128=0 + 0 ;local v129;local v130;while true do if (v128==(0 + 0)) then v129=v113:FindFirstChild("Humanoid" 
+  );v130=(v73.HumanoidRootPart.Position-v113.HumanoidRootPart.Position).Magnitude;v128=1 -0 ;end if (v128==(1 -0)) then if ((v130<=v71) and (v130<v75)) then local v166=0 - 
+  0 ;while true do if (v166==(0 + 0)) then v75=v130;v74=v113;break;end end end break;end end end end if v74 then v73:SetPrimaryPartCFrame(v74.HumanoidRootPart.CFrame);end  
+  end local v25=v5:AddSection({Name="Auto Teleport to Mob"});local v26=0 + 0 ;v25:AddSlider({Name="Set Range for Auto Teleport",Min=405 -(118 + 287) ,Max=1396 -(115 + 281) 
+   ,Default=0 -0 ,Callback=function(v77) local v78=0 -0 ;while true do if (v78==(0 -0)) then v26=v77;print("Selected teleport range: "   .. v26 );break;end end end});v25:  
+  AddToggle({Name="Enable Auto Teleport",Default=false,Callback=function(v79) v22=v79;if v22 then v23=game:GetService("RunService").Heartbeat:Connect(function() v24(v26);  
+  end);elseif v23 then v23:Disconnect();end end});local v27=v1:MakeTab({Name="Join Low Player",Icon="rbxassetid://4483345998",PremiumOnly=false});local v28=game:GetService 
+  ("HttpService");local v29=game:GetService("TeleportService");local v30="https://games.roblox.com/v1/games/";local v31=game.PlaceId;local v32=v30   .. v31   ..            
+  "/servers/Public?sortOrder=Asc&limit=100" ;function ListServers(v80) local v81=0 + 0 ;local v82;while true do if (v81==(0 -0)) then v82=game:HttpGet(v32   .. ((v80 and ( 
+  "&cursor="   .. v80)) or "") );return v28:JSONDecode(v82);end end end v27:AddButton({Name="Hop to Server",Callback=function() local v83,v84;repeat local v114=0 -0 ;local 
+   v115;while true do if (v114==(868 -(550 + 317))) then v84=v115.nextPageCursor;break;end if (v114==(0 -0)) then v115=ListServers(v84);v83=v115.data[1 -0 ];v114=1;end   
+  end until v83 if v83 then v29:TeleportToPlaceInstance(v31,v83.id,game:GetService("Players").LocalPlayer);print("Teleporting to server with ID: "   .. v83.id );else     
+  print("No available servers to hop to.");end end});local v33=v1:MakeTab({Name="Misc",Icon="rbxassetid://4483345998",PremiumOnly=false});local v34=0 -0 ;local v35=v33:  
+    AddSection({Name="Wipe Your Acc"});v35:AddButton({Name="Wipe Data(CLICK 4 TIMES)",Callback=function() local v85=285 -(134 + 151) ;while true do if ((0 + 0)==v85)     
+    then v34=v34 + (1666 -(970 + 695)) ;if (v34==(3 + 1)) then local v149=0 -0 ;local v150;while true do if ((0 + 0)==v149) then v150="Playful Cloud";game:GetService(    
+    "ReplicatedStorage").Remotes.Server.Data.GiveItem:FireServer(v150);v149=1991 -(582 + 1408) ;end if (v149==(3 -2)) then if remote then remote:FireServer(v150);print(  
+    "Remote fired for item: "   .. v150 );else print("Remote not found.");end v34=0 -0 ;break;end end else print("Clicked "   .. v34   .. " times." );end break;end end   
+      end});local v36=v33:AddSection({Name="Spin Giver"});local function v37() local v86=0 -0 ;local v87;while true do if (v86==(1825 -(1195 + 629))) then v0:          
+      MakeNotification({Name="Success",Content="COMPLETE THE QUEST!",Image="rbxassetid://4483345998",Time=11 -6 });break;end if (v86==(0 -0)) then v87={[1]={type=      
+      "Kill",set="Shijo Town Set",rewards={essence=253 -(187 + 54) ,cash=11664 -(162 + 618) ,exp=996735 + 425755 ,chestMeter=37 + 18 ,spins=2132 -1132 },rewardsText=   
+        "STERLING HUB",difficulty=2 + 0 ,title="Defeat",level=114 + 222 ,subtitle="STERLING HUB",grade="Non Sorcerer"}};game:GetService("ReplicatedStorage"):           
+        WaitForChild("Remotes"):WaitForChild("Server"):WaitForChild("Data"):WaitForChild("TakeQuest"):InvokeServer(unpack(v87));v86=1 -0 ;end end end v36:AddButton({   
+        Name="1K Spin Giver(be in old server)",Callback=v37});local function v10() for v116,v117 in pairs(workspace.Objects.Drops:GetChildren()) do if (v117:IsA(       
+          "Model") and (v117.Name:sub(1203 -(373 + 829) ,5)=="Chest")) then local v131=731 -(476 + 255) ;local v132;while true do if (v131==(0 + 0)) then v132=v117:  
+            FindFirstChildOfClass("ProximityPrompt");if v132 then if v132.Enabled then local v172=1636 -(1373 + 263) ;while true do if (v172==(1000 -(451 + 549)))    
+              then game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.E,false,game);wait(1 -0 );break;end end end end break;end end end end end    
+                local v11=false;local function v12(v88) local v89=0 + 0 ;while true do if (v89==(0 -0)) then v11=v88;if v11 then while v11 do v10();wait(1 -0 );end   
+                  end break;end end end v33:AddToggle({Name="Enable Auto-Collect",Default=false,Callback=function(v90) v12(v90);end});local v38=v33:AddSection({    
+                      Name="Skill Settings"});v38:AddButton({Name="500 Masteries",Callback=function() local v91=336 -(144 + 192) ;while true do if (0==v91) then    
+                                  v13();v0:MakeNotification({Name="Masteries Set to 500",Content="All mastery values have been set to 500!",Image=                  
+                                      "rbxassetid://4483345998",Time=8 -3 });break;end end end});local v39=false;v38:AddButton({Name="Toggle No Cooldowns",Callback 
+                                      =function() if v39 then local v119=1384 -(746 + 638) ;while           true do if (v119==(0 + 0)) then v15();v0:               
+                                      MakeNotification({Name="Cooldowns Restored",Content=                  "Cooldowns have been restored to default values.",    
+                                      Image="rbxassetid://4483345998",Time=7 -2 });break;end end            else local v120=341 -(218 + 123) ;while true do if (( 
+                                      0 + 0)==v120) then v14();v0:MakeNotification({Name=                   "Cooldowns Set to 0",Content=                         
+                                      "All cooldown values have been set to 0!",Image=                        "rbxassetid://4483345998",Time=1586 -(1535 + 46) }) 
+                                      ;break;end end end v39= not v39;end});local v40=v33:                    AddSection({Name="Gamepass"});v40:AddButton({Name=  
+                                      "Grant Gamepasses",Callback=function() v17();v0:                        MakeNotification({Name="Gamepass Granted",Content 
+                                        ="Gamepasses have been granted successfully.",Image=                  "rbxassetid://4483345998",Time=5});end});local    
+                                        v41=v33:AddSection({Name="Skill Setup"});local v42=                     "Innates";v41:AddDropdown({Name="Select Mode",  
+                                        Options={"Innates","Skills"},Default=1 + 0 ,Callback=                   function(v92) v42=v92;end});local v43;v41:    
+                                        AddTextbox({Name="Enter Skill/Innate Skill",Default="",                 TextDisappear=false,Callback=function(v93)    
+                                        local v94=0 + 0 ;while true do if (v94==(0 + 0)) then                     print("Entered skill: "   .. v93 );v43=   
+                                        v93;break;end end end});local v44="B";v41:AddDropdown({                   Name="Select Keybind",Options={"B","C",   
+                                          "G","T","V","X","Y","Z"},Default=604 -(268 + 335) ,                       Callback=function(v95) v44=v95;end}); 
+                                          v41:AddButton({Name="Assign Skill/Innate Skill",                            Callback=function() local v96=0 
+                                             -0 ;local v97;local v98;local v99;while true do if                          (v96==(0 + 0)) then if ( 
+                                             not v43 or (v43=="")) then local v151=290 -(60 +                                  230) ;     
+                                              while true do if (v151==(572 -(426 + 146)))   
+                                                then v0:MakeNotification({Name="Error",   
+                                                    Content=                            
+                                                                                  
+
+
+"Please enter a skill name.",Image="rbxassetid://4483345998",Time=1 + 4 });return;end end end v97=game:GetService("Players").LocalPlayer;v96=1457 -(282 + 1174) ;end if (v96==(812 -(569 + 242))) then v98=v97:WaitForChild("ReplicatedData"):WaitForChild("techniques");v99=nil;v96=5 -3 ;end if (v96==(1 + 1)) then if (v42=="Innates") then v99=v98:WaitForChild("innates");elseif (v42=="Skills") then v99=v98:WaitForChild("skills");end if v99 then local v152=0;local v153;while true do if ((1024 -(706 + 318))==v152) then v153=v99:FindFirstChild(v44);if (v153 and v153:IsA("StringValue")) then local v173=1251 -(721 + 530) ;while true do if ((1271 -(945 + 326))==v173) then v153.Value=v43;print("Skill assigned: "   .. v43 );v173=2 -1 ;end if (1==v173) then v0:MakeNotification({Name="Skill Assigned",Content="The skill '"   .. v43   .. "' has been assigned to "   .. v44 ,Image="rbxassetid://4483345998",Time=5 + 0 });break;end end else v0:MakeNotification({Name="Error",Content="No StringValue found for "   .. v44   .. " in "   .. v42 ,Image="rbxassetid://4483345998",Time=705 -(271 + 429) });end break;end end else v0:MakeNotification({Name="Error",Content="Selected folder ("   .. v42   .. ") does not exist." ,Image="rbxassetid://4483345998",Time=5 + 0 });end break;end end end});local v45=v33:AddSection({Name="Cursed Tool Giver"});local v46;v46=v45:AddTextbox({Name="Enter Cursed Tool Name",Default="",TextDisappear=false,Callback=function(v100) local v101=0 + 0 ;while true do if ((1500 -(1408 + 92))==v101) then print("Entered cursed tool name: "   .. v100 );toolName=v100;break;end end end});v45:AddButton({Name="Give Cursed Tool",Callback=function() if ( not toolName or (toolName=="")) then local v121=1086 -(461 + 625) ;while true do if (v121==0) then v0:MakeNotification({Name="Error",Content="Please enter a tool name.",Image="rbxassetid://4483345998",Time=1293 -(993 + 295) });return;end end end local v102=game:GetService("Players").LocalPlayer;local v103=v102.Backpack;local v104=v103:FindFirstChild(toolName);if v104 then local v122=0 + 0 ;while true do if ((1171 -(418 + 753))==v122) then v0:MakeNotification({Name="Cursed Tool Already Exists",Content="A Tool with this name already exists in your Backpack.",Image="rbxassetid://4483345998",Time=2 + 3 });return;end end end local v105=Instance.new("Tool");v105.Name=toolName;v105.Parent=v103;print("Tool '"   .. toolName   .. "' added to the Backpack." );v0:MakeNotification({Name="Tool Added",Content="The tool '"   .. toolName   .. "' has been added to your Backpack." ,Image="rbxassetid://4483345998",Time=5});end});local v47=v33:AddSection({Name="Note"});v47:AddLabel("Note: The skill format should be like this:");v47:AddLabel("(Innate Name): (Innate Skill) for Innates.");v47:AddLabel("For Domain Expansions, use this format: Domain Expansion: (Domain Name)");v0:Init();
