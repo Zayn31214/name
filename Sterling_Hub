@@ -230,7 +230,7 @@ end
 
 -- Gamepass Integration Function (added from your code)
 local function grantGamepasses()
-    local gamepassIds = {"77102528", "77102481", "77103458", "259500454"} -- Replace with your game pass IDs
+    local gamepassIds = {"77102528", "77102481", "77103458", "259500454","77102969"} -- Replace with your game pass IDs
     local player = game:GetService("Players").LocalPlayer
     local replicatedData = player:WaitForChild("ReplicatedData")
     local gamepassesFolder = replicatedData:WaitForChild("gamepasses")
