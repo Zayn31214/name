@@ -1,31 +1,30 @@
--- Load the Orion Library
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
--- Create the window for the UI
 local window = OrionLib:MakeWindow({
     Name = "Sterling Hub",
     HidePremium = false,
 })
 
--- Create a new tab for Stat Node redemption
+
 local statNodeTab = window:MakeTab({
     Name = "Stat Node",
     Icon = "rbxassetid://4483345998",  -- Custom icon (use your own if needed)
     PremiumOnly = false
 })
 
--- Create a section for redeeming stat nodes
+
 local statNodeSection = statNodeTab:AddSection({
     Name = "Unlock Move"
 })
 
--- Variable to store the stat node input
+
 local statNodeInput = ""
 
--- Textbox to enter the stat node name
+
 statNodeSection:AddTextbox({
     Name = "Enter Move Name",
-    Default = "Tool Manipulation: Wind Scythe",  -- Example default value
+    Default = "Tool Manipulation: Wind Scythe",  
     TextDisappear = false,  -- Keep the text visible after typing
     Callback = function(value)
         statNodeInput = value  -- Store the value entered in the textbox
@@ -207,6 +206,27 @@ local function resetCooldowns()  -- This function restores cooldown to default
         end
     end
 end
+
+-- Function to set humanoid health to 0 within a specified range
+local function instakillHumanoidsInRange(range)
+    local player = game:GetService("Players").LocalPlayer
+    local character = player.Character
+    if not character then return end
+
+    local humanoids = workspace.Objects.Mobs:GetChildren()
+
+    -- Loop through all humanoids in the workspace and set health to 0 if within range
+    for _, mob in ipairs(humanoids) do
+        if mob:IsA("Model") and mob:FindFirstChild("Humanoid") then
+            local humanoid = mob:FindFirstChild("Humanoid")
+            local distance = (character.HumanoidRootPart.Position - mob.HumanoidRootPart.Position).Magnitude
+            if distance <= range then
+                humanoid.Health = 0  -- Set health to 0 for humanoids within the range
+            end
+        end
+    end
+end
+
 
 -- Gamepass Integration Function (added from your code)
 local function grantGamepasses()
