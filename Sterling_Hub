@@ -241,7 +241,7 @@ local range = 0
 
 -- Function to update the range based on the textbox input
 local function updateRange(value)
-    range = tonumber(value) or 0  -- Ensuring the value is a number
+    range = tonumber(value) or 0  -- Ensuring the value is a number, defaulting to 0 if invalid
     print("Selected range: " .. range)
 end
 
