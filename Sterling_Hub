@@ -236,22 +236,16 @@ local instakillSection = mainTab:AddSection({
     Name = "Instakill Mobs"
 })
 
--- Default value for range (initially 0)
+-- Slider to set the range for instakill (0 to 1000 units)
 local range = 0
-
--- Function to update the range based on the textbox input
-local function updateRange(value)
-    range = tonumber(value) or 0  -- Ensuring the value is a number, defaulting to 0 if invalid
-    print("Selected range: " .. range)
-end
-
--- Textbox input to manually enter the range
-instakillSection:AddTextbox({
+instakillSection:AddSlider({
     Name = "Set Range for Instakill",
-    Default = tostring(range),  -- Set the default value from range
-    TextOnly = true,  -- Only numeric values should be allowed
+    Min = 0,
+    Max = 1000,
+    Default = 0,
     Callback = function(value)
-        updateRange(value)  -- Update range from textbox input
+        range = value
+        print("Selected range: " .. range)
     end
 })
 
@@ -276,19 +270,6 @@ instakillSection:AddToggle({
         end
     end
 })
-
--- Instakill logic for humanoids in range
-function instakillHumanoidsInRange(range)
-    for _, v in pairs(workspace:GetChildren()) do
-        if v:IsA("Model") and v:FindFirstChild("Humanoid") then
-            local humanoid = v:FindFirstChild("Humanoid")
-            if humanoid and (v.PrimaryPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= range then
-                humanoid.Health = 0  -- Instakill the humanoid
-            end
-        end
-    end
-end
-
 
 -- Variable to control the auto-teleport state
 local teleportEnabled = false
