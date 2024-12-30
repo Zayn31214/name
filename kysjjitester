@@ -456,49 +456,6 @@ wipeSection:AddButton({
 })
 
 
--- Gamepass Section in Misc
-local spinSection = miscTab:AddSection({
-    Name = "Spin Giver"
-})
-
--- Define the function for 1k spins
-local function give1KSpins()
-    local args = {
-        [1] = {
-            ["type"] = "Kill",
-            ["set"] = "Shijo Town Set",
-            ["rewards"] = {
-                ["essence"] = 12,
-                ["cash"] = 10884,
-                ["exp"] = 1422490,
-                ["chestMeter"] = 55,
-                ["spins"] = 1000,
-            },
-            ["rewardsText"] = "STERLING HUB",
-            ["difficulty"] = 2,
-            ["title"] = "Defeat",
-            ["level"] = 336,
-            ["subtitle"] = "STERLING HUB",
-            ["grade"] = "Non Sorcerer"
-        }
-    }
-
-    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Server"):WaitForChild("Data"):WaitForChild("TakeQuest"):InvokeServer(unpack(args))
-    OrionLib:MakeNotification({
-        Name = "Success",
-        Content = "COMPLETE THE QUEST!",
-        Image = "rbxassetid://4483345998",
-        Time = 5
-    })
-end
-
--- Add the button to the section
-spinSection:AddButton({
-    Name = "1K Spin Giver(be in old server)",
-    Callback = give1KSpins
-})
-
-
 -- Function to collect chests by interacting with the proximity prompt
 local function collectChest()
     -- Iterate over all objects in workspace.Objects.Drops
