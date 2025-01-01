@@ -25,7 +25,6 @@ Tab:CreateToggle({
     CurrentValue = instaLevelQuestEnabled,
     Callback = function(State)
         instaLevelQuestEnabled = State
-        SaveManager:SaveToggle("InstaLevelQuestEnabled", State)
     end
 })
 
