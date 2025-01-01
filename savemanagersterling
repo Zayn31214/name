@@ -1,7 +1,7 @@
 local SaveManager = {}
 
 -- Settings for the save file
-local configFolder = "Sterling Hub"
+local configFolder = "Sterling Hub Hub"
 local configFileName = "settings.json"
 
 -- Create the config folder and load the config file (if available)
