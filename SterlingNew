@@ -272,7 +272,7 @@ Tab:CreateToggle({
 
 Tab:CreateSlider({
     Name = "Tweening Range",
-    Range = {5, 1000},
+    Range = {5, 5000},
     Increment = 5,
     CurrentValue = tweenRange,
     Callback = function(Value)
@@ -282,7 +282,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "Tween Speed",
-    Range = {0.5, 5000},
+    Range = {0.5, 1000},
     Increment = 1,
     CurrentValue = tweenSpeed,
     Callback = function(Value)
@@ -439,8 +439,11 @@ local autoTriggerEnabled = false -- Toggle state
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
+local lastFired = 0
+local cooldown = 2 -- 2 seconds cooldown
+
 Misc:CreateToggle({
-    Name = "Auto Collect Chest(Turn on your autoclicker)",
+    Name = "Auto Collect Chest (Turn on your autoclicker)",
     CurrentValue = autoCollectEnabled,
     Callback = function(Value)
         autoCollectEnabled = Value
@@ -448,11 +451,15 @@ Misc:CreateToggle({
 })
 
 ProximityPromptService.PromptShown:Connect(function(prompt)
-    if autoCollectEnabled then
-        wait(2)
+    local currentTime = tick() -- Get the current time
+    
+    -- Check if enough time has passed since the last prompt was fired
+    if autoCollectEnabled and (currentTime - lastFired >= cooldown) then
         fireproximityprompt(prompt)
+        lastFired = currentTime -- Update lastFired to the current time
     end
 end)
+
 
 Misc:CreateSection("Free Innate Slots, Skip Spins")
 
