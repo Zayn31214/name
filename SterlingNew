@@ -272,7 +272,7 @@ Tab:CreateToggle({
 
 Tab:CreateSlider({
     Name = "Tweening Range",
-    Range = {5, 5000},
+    Range = {5, 1000},
     Increment = 5,
     CurrentValue = tweenRange,
     Callback = function(Value)
@@ -440,7 +440,7 @@ local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
 local lastFired = 0
-local cooldown = 2 -- 2 seconds cooldown
+local cooldown = 4 -- 2 seconds cooldown
 
 Misc:CreateToggle({
     Name = "Auto Collect Chest (Turn on your autoclicker)",
@@ -459,7 +459,6 @@ ProximityPromptService.PromptShown:Connect(function(prompt)
         lastFired = currentTime -- Update lastFired to the current time
     end
 end)
-
 
 Misc:CreateSection("Free Innate Slots, Skip Spins")
 
