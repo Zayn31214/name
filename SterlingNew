@@ -447,6 +447,8 @@ Misc:CreateToggle({
     end
 })
 
+wait(2)
+
 ProximityPromptService.PromptShown:Connect(function(prompt)
     if autoCollectEnabled then
         fireproximityprompt(prompt)
