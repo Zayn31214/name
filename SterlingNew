@@ -282,7 +282,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "Tween Speed",
-    Range = {0.5, 1000},
+    Range = {0.5, 5000},
     Increment = 1,
     CurrentValue = tweenSpeed,
     Callback = function(Value)
