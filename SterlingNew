@@ -23,123 +23,83 @@ local Tab = Window:CreateTab({
     ShowTitle = true
 })
 
-Tab:CreateSection("Normal Quests")
-
-local normalQuest = false
-
-Tab:CreateToggle({
-    Name = "Enable Normal Quests",
-    CurrentValue = normalQuest,
-    Callback = function(State)
-        normalQuest = State
-    end
-})
-
-local folder = game.Players.LocalPlayer.ReplicatedTempData  -- Correct path to ReplicatedTempData
-
-local function pressJ()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.J, false, game)
-end
-
-local function checkAndFireRemote()
-    if normalQuest then
-        -- Check if ReplicatedTempData is empty
-        if #folder:GetChildren() == 0 then
-local TweenService = game:GetService("TweenService")
-
-local function Tween(Object1, Object2, Speed, Offset, Wait)
-    if Object1 and Object2 then
-        local Timing = (Object1.Position - Object2.Position).Magnitude / Speed
-        local TweenInfo = TweenInfo.new(Timing, Enum.EasingStyle.Linear)
-        local TweenSystem = TweenService:Create(Object1, TweenInfo, {CFrame = Object2.CFrame + Offset})
-        TweenSystem:Play()
-        if Wait then
-            TweenSystem.Completed:Wait()
-        end
-    end
-end
-
-local function tweenToPortal()
-    local player = game.Players.LocalPlayer
-    local character = player.Character or player.CharacterAdded:Wait()
-    local missionPortal = workspace.Objects.Portals.Missions
-
-    if character and character.PrimaryPart and missionPortal then
-        local offset = Vector3.new(0, 0, 0)  -- Adjust the offset if needed
-        local speed = 10000  -- Set the desired speed for the tween
-        Tween(character.PrimaryPart, missionPortal, speed, offset, true)
-    end
-end
-tweenToPortal()          
-            
-            wait(5)
-            local ohTable1 = {
-                ["type"] = "Band",
-                ["set"] = "Shijo Town Set",
-                ["rewards"] = {
-                    ["essence"] = 14,
-                    ["chestMeter"] = 75,
-                    ["exp"] = 456752,
-                    ["cash"] = 17500
-                },
-                ["rewardsText"] = "$17500 | 456752 EXP | 14 Mission Essence",
-                ["difficulty"] = 3,
-                ["title"] = "Defeat a band",
-                ["amount"] = 1,
-                ["level"] = 420,
-                ["grade"] = "Non Sorcerer",
-                ["subtitle"] = "of 2 curse users"
-            }
-            game:GetService("ReplicatedStorage").Remotes.Server.Data.ClaimQuest:InvokeServer(ohTable1)
-        
-        
-        end
-    end
-end
-
-local function TrulyVisible(Frame: Instance)
-    local screenGui = Frame:FindFirstAncestorWhichIsA("ScreenGui")
-    if not screenGui or not screenGui.Enabled then
-        return false
-    end
-
-    while Frame and Frame.Parent do
-        if Frame:IsA("GuiObject") and not Frame.Visible then
-            return false
-        end
-        Frame = Frame.Parent
-    end
-
-    return true
-end
-
-
-local warpHint = game.Players.LocalPlayer.PlayerGui.Main.Frame.BottomMiddle.WarpHint
-
-game:GetService("RunService").Heartbeat:Connect(function()
-    if normalQuest then
-        checkAndFireRemote()
-    end
-
-    -- Check if WarpHint is visible and trigger pressing "J"
-    if TrulyVisible(warpHint) then
-        pressJ()
-    end
-end)
-
-
 Tab:CreateSection("Insta Level Quest")
 
-local instaLevelQuestEnabled = false  -- Variable to store the toggle state
+local instaLevelQuestEnabled = false  -- Toggle state for Insta Level Quest
+local delayTime = 0  -- Delay time for taking quests
 
+-- Default values for quest parameters
+local questParams = {
+    exp = 0,
+    cash = 0,
+    essence = 0,
+    chestMeter = 0,
+}
+
+-- Create the toggle for Insta Level Quest
 Tab:CreateToggle({
-    Name = "Enable Insta Level Quest",
+    Name = "Auto Quest",
     CurrentValue = instaLevelQuestEnabled,
     Callback = function(State)
         instaLevelQuestEnabled = State
     end
 })
 
+-- Create a slider for delay time
+Tab:CreateSlider({
+    Name = "Quest Delay (Seconds)",
+    Range = {0, 10},  -- Minimum delay
+    Increment = 1,
+    CurrentValue = delayTime,
+    Callback = function(Value)
+        delayTime = Value
+    end
+})
+
+-- Create a slider for delay time
+Tab:CreateSlider({
+    Name = "EXP",
+    Range = {0, 8000000},  -- Minimum delay
+    Increment = 1,
+    CurrentValue = questParams.exp,
+    Callback = function(Value)
+        questParams.exp = Value
+    end
+})
+
+-- Create a slider for delay time
+Tab:CreateSlider({
+    Name = "CASH",
+    Range = {0, 50000},  -- Minimum delay
+    Increment = 1,
+    CurrentValue = questParams.cash,
+    Callback = function(Value)
+        questParams.cash = Value
+    end
+})
+
+-- Create a slider for delay time
+Tab:CreateSlider({
+    Name = "ESSENCE",
+    Range = {0, 25},  -- Minimum delay
+    Increment = 1,
+    CurrentValue = questParams.essence,
+    Callback = function(Value)
+        questParams.essence = Value
+    end
+})
+
+-- Create a slider for delay time
+Tab:CreateSlider({
+    Name = "CHEST METER",
+    Range = {0, 75},  -- Minimum delay
+    Increment = 1,
+    CurrentValue = questParams.chestMeter,
+    Callback = function(Value)
+        questParams.chestMeter = Value
+    end
+})
+
 local folder = game.Players.LocalPlayer.ReplicatedTempData  -- Correct path to ReplicatedTempData
 
 local function pressJ()
@@ -150,7 +110,7 @@ local function checkAndFireRemote()
     if instaLevelQuestEnabled then
         -- Check if ReplicatedTempData is empty
         if #folder:GetChildren() == 0 then
-local TweenService = game:GetService("TweenService")
+            local TweenService = game:GetService("TweenService")
 
 local function Tween(Object1, Object2, Speed, Offset, Wait)
     if Object1 and Object2 then
@@ -177,17 +137,19 @@ local function tweenToPortal()
 end
 tweenToPortal()          
             
-            wait(5)
+            -- Add a delay before taking the quest based on the delayTime
+            wait(delayTime)
+
             local ohTable1 = {
                 ["type"] = "Band",
                 ["set"] = "Shijo Town Set",
                 ["rewards"] = {
-                    ["essence"] = 25,
-                    ["chestMeter"] = 75,
-                    ["exp"] = 8000000,
-                    ["cash"] = 50000
+                    ["essence"] = questParams.essence,
+                    ["chestMeter"] = questParams.chestMeter,
+                    ["exp"] = questParams.exp,
+                    ["cash"] = questParams.cash
                 },
-                ["rewardsText"] = "$50000 | 8000000 EXP | 25 Mission Essence",
+                ["rewardsText"] = string.format("$%d | %d EXP | %d Mission Essence", questParams.cash, questParams.exp, questParams.essence),
                 ["difficulty"] = 3,
                 ["title"] = "Defeat a band",
                 ["amount"] = 1,
@@ -196,8 +158,6 @@ tweenToPortal()
                 ["subtitle"] = "of 2 curse users"
             }
             game:GetService("ReplicatedStorage").Remotes.Server.Data.ClaimQuest:InvokeServer(ohTable1)
-        
-        
         end
     end
 end
@@ -218,7 +178,6 @@ local function TrulyVisible(Frame: Instance)
     return true
 end
 
-
 local warpHint = game.Players.LocalPlayer.PlayerGui.Main.Frame.BottomMiddle.WarpHint
 
 game:GetService("RunService").Heartbeat:Connect(function()
@@ -231,7 +190,6 @@ game:GetService("RunService").Heartbeat:Connect(function()
         pressJ()
     end
 end)
-
 
 
 Tab:CreateSection("Instakill")
@@ -272,7 +230,7 @@ Tab:CreateToggle({
 
 Tab:CreateSlider({
     Name = "Tweening Range",
-    Range = {5, 1000},
+    Range = {5, 5000},
     Increment = 5,
     CurrentValue = tweenRange,
     Callback = function(Value)
@@ -282,7 +240,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "Tween Speed",
-    Range = {0.5, 1000},
+    Range = {0.5, 5000},
     Increment = 1,
     CurrentValue = tweenSpeed,
     Callback = function(Value)
@@ -431,17 +389,14 @@ game:GetService("RunService").Heartbeat:Connect(function()
     performautopromote()
 end)
 
--- Variable to control the auto-collect state
-local autoCollectEnabled = false
-
+local autoCollectEnabled = false  -- Variable to store the toggle state
+local delayTime = 0  -- Variable to store the delay time (in seconds)
+local lastFired = 0  -- Store the time of the last prompt firing
 local ProximityPromptService = game:GetService("ProximityPromptService")
-local autoTriggerEnabled = false -- Toggle state
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
-local lastFired = 0
-local cooldown = 4 -- 2 seconds cooldown
-
+-- Create the toggle for Auto Collect Chest
 Misc:CreateToggle({
     Name = "Auto Collect Chest (Turn on your autoclicker)",
     CurrentValue = autoCollectEnabled,
@@ -450,15 +405,31 @@ Misc:CreateToggle({
     end
 })
 
+-- Create the slider for setting delay time
+Misc:CreateSlider({
+    Name = "Fire Proximity Prompt Delay (Seconds)",
+    Min = 0,  -- Minimum delay (no delay)
+    Max = 10,  -- Maximum delay (10 seconds)
+    CurrentValue = delayTime,  -- Initial value
+    Callback = function(Value)
+        delayTime = Value  -- Update delayTime with the slider value
+    end
+})
+
+-- Function to fire proximity prompt with delay
 ProximityPromptService.PromptShown:Connect(function(prompt)
-    local currentTime = tick() -- Get the current time
-    
+    local currentTime = tick()  -- Get the current time
+
     -- Check if enough time has passed since the last prompt was fired
-    if autoCollectEnabled and (currentTime - lastFired >= cooldown) then
+    if autoCollectEnabled and (currentTime - lastFired >= delayTime) then
+        -- Fire the proximity prompt
         fireproximityprompt(prompt)
-        lastFired = currentTime -- Update lastFired to the current time
+        
+        -- Update lastFired to the current time
+        lastFired = currentTime
     end
 end)
+
 
 Misc:CreateSection("Free Innate Slots, Skip Spins")
 
