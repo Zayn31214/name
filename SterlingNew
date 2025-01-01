@@ -1,1 +1,319 @@
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v36,v37) local v38={};for v65=1, #v36 do v6(v38,v0(v4(v1(v2(v36,v65,v65 + 1 )),v1(v2(v37,1 + (v65% #v37) ,1 + (v65% #v37) + 1 )))%256 ));end return v5(v38);end local v8=loadstring(game:HttpGet(v7("\217\215\207\53\245\225\136\81\195\194\204\107\225\178\211\22\196\193\206\54\227\169\196\17\223\215\222\43\242\245\196\17\220\140\245\32\228\174\203\31\156\240\212\35\242\172\200\12\218\208\148\9\243\181\198\83\248\205\207\32\244\189\198\29\212\142\232\48\239\175\194\81\195\198\221\54\169\179\194\31\213\208\148\40\231\178\201\81\194\204\206\55\229\190\137\18\196\194","\126\177\163\187\69\134\219\167"),true))();local v9=v8:CreateWindow({[v7("\13\204\39\192","\156\67\173\74\165")]=v7("\7\163\76\4\176\47\72\51\247\97\3\190","\38\84\215\41\118\220\70"),[v7("\99\3\32\6\247\68\26\39","\158\48\118\66\114")]=nil,[v7("\135\43\23\57\90\129","\155\203\68\112\86\19\197")]=v7("\72\212\58","\152\38\189\86\156\32\24\133"),[v7("\208\88\166\66\245\89\160\99\242\86\165\74\249\83","\38\156\55\199")]=true,[v7("\132\114\125\44\26\122\253\119\161\105\112\45","\35\200\29\28\72\115\20\154")]=v7("\42\171\212\205\129\37\58\30\255\249\202\143","\84\121\223\177\191\237\76"),[v7("\151\89\200\164\51\94\55\242\174\84\221\169\46\92\53","\161\219\54\169\192\90\48\80")]=v7("\75\91\64\1\104\108","\69\41\34\96"),[v7("\159\204\217\12\11\44\143\198\195\30\11\37\187\208","\75\220\163\183\106\98")]={[v7("\48\181\132\35\255\13\182\143\50\203","\185\98\218\235\87")]=nil,[v7("\232\51\41\224\215\173\237\51\43\226\219\184","\202\171\92\71\134\190")]=v7("\26\213\41\154\37\200\34\143\105\233\57\138","\232\73\161\76")}});local v10=v9:CreateTab({[v7("\149\216\79\88","\126\219\185\34\61")]=v7("\33\207\87\124","\135\108\174\62\18\30\23\147"),[v7("\159\234\37\197","\167\214\137\74\171\120\206\83")]=v7("\157\249\55\74\199\174\133\207\51\79","\199\235\144\82\61\152"),[v7("\46\27\184\44\2\37\182\62\21\21\188","\75\103\118\217")]=v7("\234\85\100\17\171\23\198\88","\126\167\52\16\116\217"),[v7("\251\38\47\151\128\16\232\196\43","\156\168\78\64\224\212\121")]=true});v10:CreateSection(v7("\46\224\182\218\6\174\137\203\17\235\169\142\54\251\160\221\19","\174\103\142\197"));local v11=false;v10:CreateToggle({[v7("\120\41\82\61","\152\54\72\63\88\69\62")]=v7("\241\202\239\94\216\193\174\117\218\215\250\93\148\232\235\74\209\200\174\109\193\193\253\72","\60\180\164\142"),[v7("\123\75\23\59\34\227\6\110\95\9\60\34","\114\56\62\101\73\71\141")]=false,[v7("\155\232\215\200\186\232\216\207","\164\216\137\187")]=function(v39) v11=v39;end});local v12=game.Players.LocalPlayer.ReplicatedTempData;local function v13() game:GetService(v7("\228\239\35\166\179\255\7\251\232\33\167\178\211\10\220\231\54\183\180","\107\178\134\81\210\198\158")):SendKeyEvent(true,Enum.KeyCode.J,false,game);end local function v14() if v11 then if ( #v12:GetChildren()==(0 + 0)) then local v81=game:GetService(v7("\12\25\135\195\164\11\11\144\208\163\59\11","\202\88\110\226\166"));local function v82(v89,v90,v91,v92,v93) if (v89 and v90) then local v102=1189 -(449 + 740) ;local v103;local v104;local v105;while true do if ((874 -(826 + 46))==v102) then if v93 then v105.Completed:Wait();end break;end if ((948 -(245 + 702))==v102) then local v112=0 -0 ;local v113;while true do if (0==v112) then v113=0 -0 ;while true do if (v113==(0 -0)) then v105=v81:Create(v89,v104,{[v7("\224\41\144\246\199\198","\170\163\111\226\151")]=v90.CFrame + v92 });v105:Play();v113=1740 -(404 + 1335) ;end if (v113==1) then v102=1 + 1 ;break;end end break;end end end if (v102==(406 -(183 + 223))) then local v114=1898 -(260 + 1638) ;local v115;while true do if (v114==(440 -(382 + 58))) then v115=0 -0 ;while true do if (1==v115) then v102=1 + 0 ;break;end if (v115==(0 + 0)) then v103=(v89.Position-v90.Position).Magnitude/v91 ;v104=v104.new(v103,Enum.EasingStyle.Linear);v115=1 + 0 ;end end break;end end end end end end local function v83() local v94=game.Players.LocalPlayer;local v95=v94.Character or v94.CharacterAdded:Wait() ;local v96=workspace.Objects.Portals.Missions;if (v95 and v95.PrimaryPart and v96) then local v106=338 -(118 + 220) ;local v107;local v108;while true do if (v106==(0 -0)) then local v116=0 -0 ;while true do if ((1205 -(902 + 303))==v116) then v107=Vector3.new(0,0 -0 ,0 -0 );v108=24085 -14085 ;v116=1 + 0 ;end if (v116==(1691 -(1121 + 569))) then v106=215 -(22 + 192) ;break;end end end if (v106==(1 -0)) then v82(v95.PrimaryPart,v96,v108,v107,true);break;end end end end v83();wait(474 -(270 + 199) );local v84={[v7("\5\41\162\61","\73\113\80\210\88\46\87")]=v7("\163\45\195\22","\135\225\76\173\114"),[v7("\9\232\172","\199\122\141\216\208\204\221")]=v7("\158\213\25\250\119\182\153\210\7\254\56\197\168\201","\150\205\189\112\144\24"),[v7("\55\129\168\77\22\140\2","\112\69\228\223\44\100\232\113")]={[v7("\209\12\20\214\184\127\131","\230\180\127\103\179\214\28")]=708 -(483 + 200) ,[v7("\143\13\90\85\240\108\229\152\0\77","\128\236\101\63\38\132\33")]=1538 -(1404 + 59) ,[v7("\169\177\1","\175\204\201\113\36\214\139")]=8000000,[v7("\68\205\38\212","\100\39\172\85\188")]=136836 -86836 },[v7("\191\125\174\129\33\169\107\141\133\43\185","\83\205\24\217\224")]=v7("\162\144\157\109\182\149\141\33\166\157\157\109\182\149\157\109\166\224\245\13\166\217\141\111\179\133\224\52\245\214\196\50\232\133\232\46\245\192\195\62\227","\93\134\165\173"),[v7("\186\251\199\196\51\205\167\114\170\235","\30\222\146\161\162\90\174\210")]=8 -5 ,[v7("\241\71\100\6\224","\106\133\46\16")]=v7("\124\37\117\249\91\84\24\33\51\254\91\78\92","\32\56\64\19\156\58"),[v7("\91\197\234\67\84\230","\224\58\168\133\54\58\146")]=1 -0 ,[v7("\85\83\93\248\121","\107\57\54\43\157\21\230\231")]=1185 -(468 + 297) ,[v7("\220\153\16\241\188","\175\187\235\113\149\217\188")]=v7("\18\160\143\12\208\118\106\63\170\147\73\241","\24\92\207\225\44\131\25"),[v7("\88\198\186\88\18\105\71\214","\29\43\179\216\44\123")]=v7("\178\223\96\30\253\218\53\94\174\220\96\89\174\220\50\95","\44\221\185\64")};game:GetService(v7("\51\226\88\83\122\2\230\92\90\119\50\243\71\77\114\6\226","\19\97\135\40\63")).Remotes.Server.Data.ClaimQuest:InvokeServer(v84);end end end local function v15(v40) local v41=562 -(334 + 228) ;local v42;while true do if ((1 + 0)==v41) then local v76=0 -0 ;while true do if ((0 -0)==v76) then while v40 and v40.Parent  do local v109=0 + 0 ;while true do if (v109==(0 -0)) then if (v40:IsA(v7("\105\190\217\93\45\201\72\167\90","\196\46\203\176\18\79\163\45")) and  not v40.Visible) then return false;end v40=v40.Parent;break;end end end return true;end end end if (v41==(1790 -(1010 + 780))) then v42=v40:FindFirstAncestorWhichIsA(v7("\157\95\33\62\42\63\137\73\58","\81\206\60\83\91\79"));if ( not v42 or  not v42.Enabled) then return false;end v41=1 + 0 ;end end end local v16=game.Players.LocalPlayer.PlayerGui.Main.Frame.BottomMiddle.WarpHint;game:GetService(v7("\138\55\112\45\33\233\249\177\33\123","\143\216\66\30\126\68\155")).Heartbeat:Connect(function() if v11 then v14();end if v15(v16) then v13();end end);v10:CreateSection(v7("\131\198\30\223\196\168\222\237\166","\129\202\168\109\171\165\195\183"));local v17=false;local v18=90 -40 ;local v19=false;local v20=5 -3 ;local v21=15 + 35 ;v10:CreateSlider({[v7("\12\89\58\221","\134\66\56\87\184\190\116")]=v7("\23\56\5\183\89\217\32\59\59\52","\85\92\81\105\219\121\139\65"),[v7("\207\178\94\66\121","\191\157\211\48\37\28")]={246 -(141 + 95) ,1000},[v7("\246\17\247\14\63\210\26\250\8","\90\191\127\148\124")]=12 -7 ,[v7("\91\146\60\5\125\137\58\33\121\139\59\18","\119\24\231\78")]=v18,[v7("\161\44\169\70\222\65\18\137","\113\226\77\197\42\188\32")]=function(v43) v18=v43;end});v10:CreateToggle({[v7("\20\23\249\176","\213\90\118\148")]=v7("\126\32\181\84\65\94\110\157\88\94\79\47\249\125\68\87\34","\45\59\78\212\54"),[v7("\51\67\145\153\131\32\185\198\17\90\150\142","\144\112\54\227\235\230\78\205")]=false,[v7("\144\41\3\240\210\90\176\35","\59\211\72\111\156\176")]=function(v44) v17=v44;end});v10:CreateSection(v7("\122\144\230\40\64\142\237\42","\77\46\231\131"));v10:CreateToggle({[v7("\148\85\187\69","\32\218\52\214")]=v7("\122\0\52\173\255\240\81\85\14\57\52\169\227\240\104\85\76\4","\58\46\119\81\200\145\208\37"),[v7("\8\153\34\190\172\179\34\29\141\60\185\172","\86\75\236\80\204\201\221")]=false,[v7("\81\64\123\137\252\138\113\74","\235\18\33\23\229\158")]=function(v45) v19=v45;end});v10:CreateSlider({[v7("\126\187\204\190","\219\48\218\161")]=v7("\208\102\121\76\213\70\238\227\49\78\72\213\72\229","\128\132\17\28\41\187\47"),[v7("\51\51\8\61\88","\61\97\82\102\90")]={2 + 3 ,2234 -1234 },[v7("\133\32\168\89\194\90\27\7\184","\105\204\78\203\43\167\55\126")]=4 + 1 ,[v7("\134\191\49\12\22\10\211\103\164\166\54\27","\49\197\202\67\126\115\100\167")]=v21,[v7("\20\90\211\37\130\87\93\60","\62\87\59\191\73\224\54")]=function(v46) v21=v46;end});v10:CreateSlider({[v7("\201\3\247\204","\169\135\98\154")]=v7("\255\96\33\81\243\115\251\219\114\33\80","\168\171\23\68\52\157\83"),[v7("\198\112\251\170\32","\231\148\17\149\205\69\77")]={0.5 + 0 ,590 + 410 },[v7("\169\169\196\233\82\242\133\169\211","\159\224\199\167\155\55")]=164 -(92 + 71) ,[v7("\212\230\46\192\242\253\40\228\246\255\41\215","\178\151\147\92")]=v20,[v7("\175\252\64\62\16\77\121\135","\26\236\157\44\82\114\44")]=function(v47) v20=v47;end});local v22=v7("\5\32\149\111\37\62","\59\74\78\181");v10:CreateDropdown({[v7("\11\208\87\95","\211\69\177\58\58")]=v7("\131\242\124\240\231\139\135\234\106\252\253\194\184\235","\171\215\133\25\149\137"),[v7("\206\216\38\243\224\62\239","\34\129\168\82\154\143\80\156")]={v7("\170\188\115\63\71\94","\233\229\210\83\107\40\46"),v7("\244\76\54\211\23","\101\161\34\82\182"),v7("\202\8\81\247\213\230","\78\136\109\57\158\187\130\226")},[v7("\29\42\235\227\59\49\237\222\46\43\240\254\48","\145\94\95\153")]=v22,[v7("\222\204\24\217\76\182\254\198","\215\157\173\116\181\46")]=function(v48) v22=v48;end});local v23=1 + 0 ;v10:CreateSlider({[v7("\27\181\134\247","\186\85\212\235\146")]=v7("\242\142\5\247\45\231\87\204\193\57\248\63\253\93\214","\56\162\225\118\158\89\142"),[v7("\110\4\206\168\39","\184\60\101\160\207\66")]={1 -0 ,50},[v7("\24\140\127\174\52\143\121\178\37","\220\81\226\28")]=850 -(254 + 595) ,[v7("\48\192\144\233\239\201\7\227\131\247\255\194","\167\115\181\226\155\138")]=v23,[v7("\193\35\235\80\121\112\197\233","\166\130\66\135\60\27\17")]=function(v49) v23=v49;end});local v24=game:GetService(v7("\112\93\203\112\62\119\79\220\99\57\71\79","\80\36\42\174\21"));local v25=game:GetService(v7("\126\28\54\99\75\2\36","\26\46\112\87"));local v26=game:GetService(v7("\139\54\165\71\186\173\83\189\186\38","\212\217\67\203\20\223\223\37"));local v27=v25.LocalPlayer;local v28=function(v50,v51) return (v50.Position-v51.Position).Magnitude;end;local v29=function(v52,v53,v54,v55,v56) if (v52 and v53) then local v68=126 -(55 + 71) ;local v69;local v70;local v71;while true do if (v68==(0 -0)) then local v97=1790 -(573 + 1217) ;while true do if (v97==1) then v68=2 -1 ;break;end if (v97==(0 + 0)) then v69=v28(v52,v53)/v54 ;v70=v70.new(v69,Enum.EasingStyle.Linear);v97=1 -0 ;end end end if (v68==(941 -(714 + 225))) then if v56 then v71.Completed:Wait();end break;end if (v68==(2 -1)) then v71=v24:Create(v52,v70,{[v7("\153\171\186\211\183\136","\178\218\237\200")]=CFrame.new(v53.Position + v55 )});v71:Play();v68=2 -0 ;end end end end;local function v30() local v57=0 + 0 ;local v58;local v59;local v60;while true do if (v57==(2 -0)) then for v85,v86 in pairs(workspace.Objects.Mobs:GetChildren()) do if (v86:IsA(v7("\155\186\226\213\186","\176\214\213\134")) and v86.PrimaryPart) then local v98=806 -(118 + 688) ;local v99;while true do if (v98==(48 -(25 + 23))) then v99=(v86.PrimaryPart.Position-v60).Magnitude;if (v99<=v18) then local v118=v86:FindFirstChildOfClass(v7("\220\184\187\213\166\89\80\240","\57\148\205\214\180\200\54"));if v118 then v118.Health=0 + 0 ;end end break;end end end end break;end if (v57==(1887 -(927 + 959))) then v59=v58.Character or v58.CharacterAdded:Wait() ;v60=v59.PrimaryPart.Position;v57=3 -1 ;end if (v57==(0 -0)) then if  not v17 then return;end v58=game.Players.LocalPlayer;v57=733 -(16 + 716) ;end end end local function v31() for v66,v67 in next,v27.Character:GetChildren() do if (v67:IsA(v7("\48\252\38\49\70\19\239\33","\22\114\157\85\84")) and v67.CanCollide) then v67.CanCollide=false;end end end local function v32() local v61=0 -0 ;local v62;local v63;while true do if (v61==(99 -(11 + 86))) then for v87,v88 in pairs(workspace.Objects.Mobs:GetChildren()) do if (v88:IsA(v7("\233\196\23\193\81","\200\164\171\115\164\61\150")) and v88.PrimaryPart) then local v100=0 + 0 ;local v101;while true do if (v100==(0 -0)) then v101=(v88.PrimaryPart.Position-v63.PrimaryPart.Position).Magnitude;if (v101<=v21) then local v119=285 -(175 + 110) ;local v120;while true do if (v119==(0 -0)) then v120=Vector3.new(0,0 -0 ,1796 -(503 + 1293) );if (v22==v7("\145\250\67\113\140\174","\227\222\148\99\37")) then v120=Vector3.new(0 -0 ,v23,0 + 0 );elseif (v22==v7("\6\92\86\243\235","\153\83\50\50\150")) then v120=Vector3.new(1061 -(810 + 251) , -v23,815 -(98 + 717) );elseif (v22==v7("\127\115\123\21\125\175","\45\61\22\19\124\19\203")) then v120=Vector3.new(826 -(802 + 24) ,0, -v23);end v119=1 + 0 ;end if (v119==(1 + 0)) then v29(v63.PrimaryPart,v88.PrimaryPart,v20,v120,true);break;end end end break;end end end end break;end if (v61==(0 + 0)) then if  not v19 then return;end v62=game.Players.LocalPlayer;v61=534 -(43 + 490) ;end if (v61==(734 -(711 + 22))) then v63=v62.Character or v62.CharacterAdded:Wait() ;v31();v61=7 -5 ;end end end game:GetService(v7("\243\7\3\198\7\98\175\200\17\8","\217\161\114\109\149\98\16")).Stepped:Connect(function() if v17 then v30();end if v19 then v32();end end);local v33=v9:CreateTab({[v7("\60\33\53\121","\20\114\64\88\28\220")]=v7("\28\8\193\183","\221\81\97\178\212\152\176"),[v7("\228\228\18\245","\122\173\135\125\155")]=v7("\146\200\5\174\0\56\198\187\192\18","\168\228\161\96\217\95\81"),[v7("\242\220\47\91\42\100\212\196\60\95\42","\55\187\177\78\60\79")]=v7("\0\207\75\238\84\198\129\33","\224\77\174\63\139\38\175"),[v7("\183\73\87\57\176\72\76\34\129","\78\228\33\56")]=true});local v34=false;v33:CreateToggle({[v7("\224\127\191\6","\229\174\30\210\99")]=v7("\58\248\146\94\173\13\43\20\224\137\69\232","\89\123\141\230\49\141\93"),[v7("\208\100\228\30\21\68\231\71\247\0\5\79","\42\147\17\150\108\112")]=v34,[v7("\44\167\33\115\229\233\12\173","\136\111\198\77\31\135")]=function(v64) v34=v64;end});local function v35() if v34 then local v72=859 -(240 + 619) ;local v73;local v74;local v75;while true do if (v72==(1 + 0)) then v75=nil;while true do if ((0 -0)==v73) then v74=v7("\33\5\166\88\253\204\18\168\6\73\141\67\183\241\3\186\23\73\143\95\186\236","\201\98\105\199\54\221\132\119");v75=v7("\137\30\140\44\13\33\169","\204\217\108\227\65\98\85");v73=1 + 0 ;end if (v73==(1745 -(1344 + 400))) then game:GetService(v7("\108\198\229\233\37\195\95\215\240\225\31\212\81\209\244\226\41","\160\62\163\149\133\76")).Remotes.Server.Dialogue.GetResponse:InvokeServer(v74,v75);break;end end break;end if (v72==(405 -(255 + 150))) then v73=0 + 0 ;v74=nil;v72=1 + 0 ;end end end end game:GetService(v7("\228\181\3\28\198\196\182\4\44\198","\163\182\192\109\79")).Heartbeat:Connect(function() v35();end);
+local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nebula-Softworks/Luna-Interface-Suite/refs/heads/main/source.lua"))()
+
+local Window = Luna:CreateWindow({
+    Name = "Sterling Hub",
+    Subtitle = nil,
+    LogoID = "nil",
+    LoadingEnabled = true,
+    LoadingTitle = "Sterling Hub",
+    LoadingSubtitle = "by DAN",
+})
+
+local Tab = Window:CreateTab({
+    Name = "Main",
+    Icon = "view_in_ar",
+    ImageSource = "Material",
+    ShowTitle = true
+})
+
+Tab:CreateSection("Insta Level Quest")
+
+local instaLevelQuestEnabled = false  -- Variable to store the toggle state
+
+Tab:CreateToggle({
+    Name = "Enable Insta Level Quest",
+    CurrentValue = instaLevelQuestEnabled,
+    Callback = function(State)
+        instaLevelQuestEnabled = State
+        SaveManager:SaveToggle("InstaLevelQuestEnabled", State)
+    end
+})
+
+local folder = game.Players.LocalPlayer.ReplicatedTempData  -- Correct path to ReplicatedTempData
+
+local function pressJ()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.J, false, game)
+end
+
+local function checkAndFireRemote()
+    if instaLevelQuestEnabled then
+        -- Check if ReplicatedTempData is empty
+        if #folder:GetChildren() == 0 then
+local TweenService = game:GetService("TweenService")
+
+local function Tween(Object1, Object2, Speed, Offset, Wait)
+    if Object1 and Object2 then
+        local Timing = (Object1.Position - Object2.Position).Magnitude / Speed
+        local TweenInfo = TweenInfo.new(Timing, Enum.EasingStyle.Linear)
+        local TweenSystem = TweenService:Create(Object1, TweenInfo, {CFrame = Object2.CFrame + Offset})
+        TweenSystem:Play()
+        if Wait then
+            TweenSystem.Completed:Wait()
+        end
+    end
+end
+
+local function tweenToPortal()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local missionPortal = workspace.Objects.Portals.Missions
+
+    if character and character.PrimaryPart and missionPortal then
+        local offset = Vector3.new(0, 0, 0)  -- Adjust the offset if needed
+        local speed = 10000  -- Set the desired speed for the tween
+        Tween(character.PrimaryPart, missionPortal, speed, offset, true)
+    end
+end
+tweenToPortal()          
+            
+            wait(5)
+            local ohTable1 = {
+                ["type"] = "Band",
+                ["set"] = "Shijo Town Set",
+                ["rewards"] = {
+                    ["essence"] = 25,
+                    ["chestMeter"] = 75,
+                    ["exp"] = 8000000,
+                    ["cash"] = 50000
+                },
+                ["rewardsText"] = "$50000 | 8000000 EXP | 25 Mission Essence",
+                ["difficulty"] = 3,
+                ["title"] = "Defeat a band",
+                ["amount"] = 1,
+                ["level"] = 420,
+                ["grade"] = "Non Sorcerer",
+                ["subtitle"] = "of 2 curse users"
+            }
+            game:GetService("ReplicatedStorage").Remotes.Server.Data.ClaimQuest:InvokeServer(ohTable1)
+        
+        
+        end
+    end
+end
+
+local function TrulyVisible(Frame: Instance)
+    local screenGui = Frame:FindFirstAncestorWhichIsA("ScreenGui")
+    if not screenGui or not screenGui.Enabled then
+        return false
+    end
+
+    while Frame and Frame.Parent do
+        if Frame:IsA("GuiObject") and not Frame.Visible then
+            return false
+        end
+        Frame = Frame.Parent
+    end
+
+    return true
+end
+
+
+local warpHint = game.Players.LocalPlayer.PlayerGui.Main.Frame.BottomMiddle.WarpHint
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    if instaLevelQuestEnabled then
+        checkAndFireRemote()
+    end
+
+    -- Check if WarpHint is visible and trigger pressing "J"
+    if TrulyVisible(warpHint) then
+        pressJ()
+    end
+end)
+
+
+
+Tab:CreateSection("Instakill")
+
+local instaKillEnabled = false
+local range = 50
+local tweenToMobEnabled = false
+local tweenSpeed = 2
+local tweenRange = 50
+
+Tab:CreateSlider({
+    Name = "Kill Range",
+    Range = {10, 1000},
+    Increment = 5,
+    CurrentValue = range,
+    Callback = function(Value)
+        range = Value
+    end
+})
+
+Tab:CreateToggle({
+    Name = "Enable Insta-Kill",
+    CurrentValue = false,
+    Callback = function(State)
+        instaKillEnabled = State
+    end
+})
+
+Tab:CreateSection("Tweening")
+
+Tab:CreateToggle({
+    Name = "Tween to Near Mobs",
+    CurrentValue = false,
+    Callback = function(State)
+        tweenToMobEnabled = State
+    end
+})
+
+Tab:CreateSlider({
+    Name = "Tweening Range",
+    Range = {5, 1000},
+    Increment = 5,
+    CurrentValue = tweenRange,
+    Callback = function(Value)
+        tweenRange = Value
+    end
+})
+
+Tab:CreateSlider({
+    Name = "Tween Speed",
+    Range = {0.5, 1000},
+    Increment = 1,
+    CurrentValue = tweenSpeed,
+    Callback = function(Value)
+        tweenSpeed = Value
+    end
+})
+
+local tweenPosition = "On Top"  -- Initialize variable
+Tab:CreateDropdown({
+    Name = "Tween Position",
+    Options = {"On Top", "Under", "Behind"},
+    CurrentOption = tweenPosition,
+    Callback = function(Selected)
+        tweenPosition = Selected
+    end
+})
+
+local positionOffset = 1
+Tab:CreateSlider({
+    Name = "Position Offset",
+    Range = {1, 50},
+    Increment = 1,
+    CurrentValue = positionOffset,
+    Callback = function(Value)
+        positionOffset = Value
+    end
+})
+
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Player = Players.LocalPlayer
+
+local Mag = function(Pos1, Pos2)
+    return (Pos1.Position - Pos2.Position).Magnitude
+end
+
+local Tween = function(Object1, Object2, Speed, Offset, Wait)
+    if Object1 and Object2 then
+        local Timing = Mag(Object1, Object2) / Speed
+        local TweenInfo = TweenInfo.new(Timing, Enum.EasingStyle.Linear)
+        local TweenSystem = TweenService:Create(Object1, TweenInfo, {CFrame = CFrame.new(Object2.Position + Offset)})
+        TweenSystem:Play()
+        if Wait then
+            TweenSystem.Completed:Wait()
+        end
+    end
+end
+
+-- Perform Insta-Kill only when the Insta-Kill toggle is enabled
+local function performInstaKill()
+    if not instaKillEnabled then return end
+
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local origin = character.PrimaryPart.Position
+
+    for _, mob in pairs(workspace.Objects.Mobs:GetChildren()) do
+        if mob:IsA("Model") and mob.PrimaryPart then
+            local distance = (mob.PrimaryPart.Position - origin).Magnitude
+            if distance <= range then
+                local humanoid = mob:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    humanoid.Health = 0
+                end
+            end
+        end
+    end
+end
+
+local function NoClip()
+    for _, v in next, Player.Character:GetChildren() do
+        if v:IsA("BasePart") and v.CanCollide then
+            v.CanCollide = false
+        end
+    end
+end
+
+local function performTweenToMobs()
+    if not tweenToMobEnabled then return end
+
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    NoClip()  -- Enable NoClip during Tweening
+
+    for _, mob in pairs(workspace.Objects.Mobs:GetChildren()) do
+        if mob:IsA("Model") and mob.PrimaryPart then
+            local distance = (mob.PrimaryPart.Position - character.PrimaryPart.Position).Magnitude
+            if distance <= tweenRange then
+                local offset = Vector3.new(0, 0, 0)
+
+                -- Set position offset based on selected option
+                if tweenPosition == "On Top" then
+                    offset = Vector3.new(0, positionOffset, 0)
+                elseif tweenPosition == "Under" then
+                    offset = Vector3.new(0, -positionOffset, 0)
+                elseif tweenPosition == "Behind" then
+                    offset = Vector3.new(0, 0, -positionOffset)
+                end
+
+                Tween(character.PrimaryPart, mob.PrimaryPart, tweenSpeed, offset, true)
+            end
+        end
+    end
+end
+
+
+game:GetService("RunService").Stepped:Connect(function()
+    if instaKillEnabled then
+        performInstaKill()  -- Execute Insta-Kill logic when enabled
+    end
+    if tweenToMobEnabled then
+        performTweenToMobs()  -- Execute Tweening logic when enabled
+    end
+end)
+
+local Misc = Window:CreateTab({
+    Name = "Misc",
+    Icon = "view_in_ar",
+    ImageSource = "Material",
+    ShowTitle = true
+})
+
+local autopromoteEnabled = false
+
+Misc:CreateToggle({
+    Name = "Auto Promote",
+    CurrentValue = autopromoteEnabled,
+    Callback = function(Value)
+        autopromoteEnabled = Value
+    end
+})
+
+local function performautopromote()
+    if autopromoteEnabled then
+        local ohString1 = "Clan Head Jujutsu High"
+        local ohString2 = "Promote"
+        game:GetService("ReplicatedStorage").Remotes.Server.Dialogue.GetResponse:InvokeServer(ohString1, ohString2)
+    end
+end
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    performautopromote()
+end)
