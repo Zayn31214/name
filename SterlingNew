@@ -25,10 +25,10 @@ local Tab = Window:CreateTab({
 
 Tab:CreateSection("Insta Level Quest")
 
-local instaLevelQuestEnabled = false  -- Toggle state for Insta Level Quest
-local delayTime = 0  -- Delay time for taking quests
+local instaLevelQuestEnabled = false 
+local delayTime = 0 
 
--- Default values for quest parameters
+
 local questParams = {
     exp = 0,
     cash = 0,
@@ -36,7 +36,7 @@ local questParams = {
     chestMeter = 0,
 }
 
--- Create the toggle for Insta Level Quest
+
 Tab:CreateToggle({
     Name = "Auto Quest",
     CurrentValue = instaLevelQuestEnabled,
@@ -45,7 +45,7 @@ Tab:CreateToggle({
     end
 })
 
--- Create a slider for delay time
+
 Tab:CreateSlider({
     Name = "Quest Delay (Seconds)",
     Range = {0, 10},  -- Minimum delay
@@ -56,7 +56,7 @@ Tab:CreateSlider({
     end
 })
 
--- Create a slider for delay time
+
 Tab:CreateSlider({
     Name = "EXP",
     Range = {0, 8000000},  -- Minimum delay
@@ -67,7 +67,7 @@ Tab:CreateSlider({
     end
 })
 
--- Create a slider for delay time
+
 Tab:CreateSlider({
     Name = "CASH",
     Range = {0, 50000},  -- Minimum delay
@@ -78,7 +78,7 @@ Tab:CreateSlider({
     end
 })
 
--- Create a slider for delay time
+
 Tab:CreateSlider({
     Name = "ESSENCE",
     Range = {0, 25},  -- Minimum delay
@@ -89,7 +89,7 @@ Tab:CreateSlider({
     end
 })
 
--- Create a slider for delay time
+
 Tab:CreateSlider({
     Name = "CHEST METER",
     Range = {0, 75},  -- Minimum delay
@@ -100,7 +100,7 @@ Tab:CreateSlider({
     end
 })
 
-local folder = game.Players.LocalPlayer.ReplicatedTempData  -- Correct path to ReplicatedTempData
+local folder = game.Players.LocalPlayer.ReplicatedTempData  
 
 local function pressJ()
     game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.J, false, game)
@@ -108,7 +108,6 @@ end
 
 local function checkAndFireRemote()
     if instaLevelQuestEnabled then
-        -- Check if ReplicatedTempData is empty
         if #folder:GetChildren() == 0 then
             local TweenService = game:GetService("TweenService")
 
@@ -130,14 +129,13 @@ local function tweenToPortal()
     local missionPortal = workspace.Objects.Portals.Missions
 
     if character and character.PrimaryPart and missionPortal then
-        local offset = Vector3.new(0, 0, 0)  -- Adjust the offset if needed
-        local speed = 10000  -- Set the desired speed for the tween
+        local offset = Vector3.new(0, 0, 0)  
+        local speed = 10000  
         Tween(character.PrimaryPart, missionPortal, speed, offset, true)
     end
 end
 tweenToPortal()          
             
-            -- Add a delay before taking the quest based on the delayTime
             wait(delayTime)
 
             local ohTable1 = {
@@ -185,7 +183,6 @@ game:GetService("RunService").Heartbeat:Connect(function()
         checkAndFireRemote()
     end
 
-    -- Check if WarpHint is visible and trigger pressing "J"
     if TrulyVisible(warpHint) then
         pressJ()
     end
@@ -248,7 +245,7 @@ Tab:CreateSlider({
     end
 })
 
-local tweenPosition = "On Top"  -- Initialize variable
+local tweenPosition = "On Top" 
 Tab:CreateDropdown({
     Name = "Tween Position",
     Options = {"On Top", "Under", "Behind"},
@@ -290,7 +287,6 @@ local Tween = function(Object1, Object2, Speed, Offset, Wait)
     end
 end
 
--- Perform Insta-Kill only when the Insta-Kill toggle is enabled
 local function performInstaKill()
     if not instaKillEnabled then return end
 
@@ -325,7 +321,7 @@ local function performTweenToMobs()
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
 
-    NoClip()  -- Enable NoClip during Tweening
+    NoClip() 
 
     for _, mob in pairs(workspace.Objects.Mobs:GetChildren()) do
         if mob:IsA("Model") and mob.PrimaryPart then
@@ -333,7 +329,6 @@ local function performTweenToMobs()
             if distance <= tweenRange then
                 local offset = Vector3.new(0, 0, 0)
 
-                -- Set position offset based on selected option
                 if tweenPosition == "On Top" then
                     offset = Vector3.new(0, positionOffset, 0)
                 elseif tweenPosition == "Under" then
@@ -351,10 +346,10 @@ end
 
 game:GetService("RunService").Stepped:Connect(function()
     if instaKillEnabled then
-        performInstaKill()  -- Execute Insta-Kill logic when enabled
+        performInstaKill() 
     end
     if tweenToMobEnabled then
-        performTweenToMobs()  -- Execute Tweening logic when enabled
+        performTweenToMobs()
     end
 end)
 
@@ -389,14 +384,13 @@ game:GetService("RunService").Heartbeat:Connect(function()
     performautopromote()
 end)
 
-local autoCollectEnabled = false  -- Variable to store the toggle state
-local delayTime = 0  -- Variable to store the delay time (in seconds)
-local lastFired = 0  -- Store the time of the last prompt firing
+local autoCollectEnabled = false 
+local delayTime = 0  
+local lastFired = 0 
 local ProximityPromptService = game:GetService("ProximityPromptService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
--- Create the toggle for Auto Collect Chest
 Misc:CreateToggle({
     Name = "Auto Collect Chest (Turn on your autoclicker)",
     CurrentValue = autoCollectEnabled,
@@ -405,27 +399,26 @@ Misc:CreateToggle({
     end
 })
 
--- Create the slider for setting delay time
+
 Misc:CreateSlider({
     Name = "Fire Proximity Prompt Delay (Seconds)",
     Min = 0,  -- Minimum delay (no delay)
-    Max = 10,  -- Maximum delay (10 seconds)
+    Max = 10, 
     CurrentValue = delayTime,  -- Initial value
     Callback = function(Value)
-        delayTime = Value  -- Update delayTime with the slider value
+        delayTime = Value 
     end
 })
 
--- Function to fire proximity prompt with delay
+
 ProximityPromptService.PromptShown:Connect(function(prompt)
     local currentTime = tick()  -- Get the current time
 
     -- Check if enough time has passed since the last prompt was fired
     if autoCollectEnabled and (currentTime - lastFired >= delayTime) then
-        -- Fire the proximity prompt
         fireproximityprompt(prompt)
         
-        -- Update lastFired to the current time
+
         lastFired = currentTime
     end
 end)
@@ -452,7 +445,7 @@ local Button = Misc:CreateButton({
             local gamepassValue = gamepassesFolder:FindFirstChild(gamepassId)
 
             if not gamepassValue then
-                -- If the BoolValue doesn't exist for the gamepass, create and add it
+              
                 gamepassValue = Instance.new("BoolValue")
                 gamepassValue.Name = gamepassId
                 gamepassValue.Value = true
@@ -466,7 +459,7 @@ local Button = Misc:CreateButton({
 })
 Misc:CreateSection("Skill Giver(Not Perm)")
 
--- Create a dropdown for selecting mode (Innates or Skills)
+
 local modeSelected = "Innates"
 local DropDown = Misc:CreateDropdown({
     Name = "Select Mode",
@@ -477,19 +470,18 @@ local DropDown = Misc:CreateDropdown({
     end
 })
 
--- Input box for skill name
+
 local skillName
 local Input = Misc:CreateInput({
     Name = "Enter Skill/Innate Skill",
     CurrentValue = "",
-    TextDisappear = false,  -- Changed to false so text stays visible
+    TextDisappear = false,  
     Callback = function(value)
         print("Entered skill: " .. value)
-        skillName = value  -- Store the value entered in the textbox here
+        skillName = value  
     end
 })
 
--- Dropdown for selecting keybind (B, C, etc.)
 local keybindSelected = "B"
 local DropDown = Misc:CreateDropdown({
     Name = "Select Keybind",
@@ -500,11 +492,10 @@ local DropDown = Misc:CreateDropdown({
     end
 })
 
--- Button to assign the skill
+
 local Button = Misc:CreateButton({
     Name = "Assign Skill/Innate Skill",
     Callback = function()
-        -- Ensure the skillName is set
         if not skillName or skillName == "" then
             Luna:Notification({
                 Title = "Error",
@@ -516,7 +507,6 @@ local Button = Misc:CreateButton({
             return
         end
 
-        -- Handle skill assignment to the selected mode and keybind
         local player = game:GetService("Players").LocalPlayer
         local techniques = player:WaitForChild("ReplicatedData"):WaitForChild("techniques")
         local selectedFolder
@@ -559,7 +549,6 @@ local Button = Misc:CreateButton({
     end
 })
 
--- Create a tab
 local Tab = Window:CreateTab({
     Name = "Move Redeemer",
     Icon = "check",
@@ -579,8 +568,6 @@ local Input = Tab:CreateInput({
 	Enter = false, -- When true, the callback will only be executed when the user presses enter.
     	Callback = function(Text)
         moveName = Text
-       	 -- The function that takes place when the input is changed
-	 -- The variable (Text) is a string for the value in the text box
     	end
 }, "Input")
 
@@ -588,7 +575,6 @@ local Button = Tab:CreateButton({
     Name = "Redeem Move",
     Callback = function()
         if moveName and moveName ~= "" then
-            -- Call the server with the entered move name
             game:GetService("ReplicatedStorage").Remotes.Server.Data.UnlockStatNode:InvokeServer(moveName)
             print("Redeemed move:", moveName)
         else
