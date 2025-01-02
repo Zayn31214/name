@@ -4,7 +4,6 @@ local HttpService = game:GetService("HttpService")
 
 local configFile = "SterlingHubConfig.json"
 
--- Default configuration
 local config = {
     instaLevelQuestEnabled = false,
     delayTime = 0,
@@ -29,7 +28,6 @@ local config = {
     autoreplayEnabled = false
 }
 
--- Load configuration function
 local function loadConfig()
     if isfile(configFile) then
         local data = readfile(configFile)
@@ -38,24 +36,22 @@ local function loadConfig()
         end)
         if success then
             for k, v in pairs(result) do
-                config[k] = v  -- Update config fields directly
+                config[k] = v 
             end
         end
     end
 end
 
 local function saveConfig()
-    local data = game:GetService("HttpService"):JSONEncode(config)  -- Encode the config directly
+    local data = game:GetService("HttpService"):JSONEncode(config)
     writefile(configFile, data)
 end
 
--- Save configuration function
 local function saveConfig()
-    local data = game:GetService("HttpService"):JSONEncode(config)  -- Encode the config directly
+    local data = game:GetService("HttpService"):JSONEncode(config)
     writefile(configFile, data)
 end
 
--- Auto-load configuration on script start
 loadConfig()
 
 
@@ -69,15 +65,15 @@ local Window = Luna:CreateWindow({
     LoadingSubtitle = "by DAN",
 
     ConfigSettings = {
-		RootFolder = nil, -- The Root Folder Is Only If You Have A Hub With Multiple Game Scripts and u may remove it. DO NOT ADD A SLASH
-		ConfigFolder = "Sterling Hub" -- The Name Of The Folder Where Luna Will Store Configs For This Script. DO NOT ADD A SLASH
+		RootFolder = nil,
+		ConfigFolder = "Sterling Hub" 
     },
 })
 
 Window:CreateHomeTab({
-	SupportedExecutors = {}, -- A Table Of Executors Your Script Supports. Add strings of the executor names for each executor.
-	DiscordInvite = "pvwpXmTmT7", -- The Discord Invite Link. Do Not Include discord.gg/ | Only Include the code.
-	Icon = 1, -- By Default, The Icon Is The Home Icon. If You would like to change it to dashboard, replace the interger with 2
+	SupportedExecutors = {},
+	DiscordInvite = "pvwpXmTmT7",
+	Icon = 1, 
 })
 
 local Tab = Window:CreateTab({
@@ -114,7 +110,7 @@ Tab:CreateToggle({
 
 Tab:CreateSlider({
     Name = "Quest Delay (Seconds)",
-    Range = {0, 10},  -- Minimum delay
+    Range = {0, 10},
     Increment = 1,
     CurrentValue = config.delayTime,
     Callback = function(Value)
@@ -127,7 +123,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "EXP",
-    Range = {0, 8000000},  -- Minimum delay
+    Range = {0, 8000000}, 
     Increment = 1,
     CurrentValue = config.exp,
     Callback = function(Value)
@@ -140,7 +136,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "CASH",
-    Range = {0, 50000},  -- Minimum delay
+    Range = {0, 50000}, 
     Increment = 1,
     CurrentValue = config.cash,
     Callback = function(Value)
@@ -153,7 +149,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "ESSENCE",
-    Range = {0, 25},  -- Minimum delay
+    Range = {0, 25},
     Increment = 1,
     CurrentValue = config.missionessence,
     Callback = function(Value)
@@ -166,7 +162,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "CHEST METER",
-    Range = {0, 75},  -- Minimum delay
+    Range = {0, 75},
     Increment = 1,
     CurrentValue = config.chestMeter,
     Callback = function(Value)
@@ -440,7 +436,7 @@ game:GetService("RunService").Stepped:Connect(function()
 end)
 
 Tab:CreateSection("Auto Boss")
-local delayTime = 0.5    -- The delay time between actions
+local delayTime = 0.5   
 local autoreplayEnabled = false
 
 local replayButton = game:GetService("Players").LocalPlayer.PlayerGui.ReadyScreen.Frame.Replay
@@ -449,18 +445,13 @@ local GuiService = game:GetService("GuiService")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local folder = workspace.Objects.Drops
 
--- Function to Auto Replay after All Chests are Collected
 local function autoReplay()
-    -- Wait for the chest folder to be empty (all chests collected)
     print("Waiting for chests to be collected...")
-  -- Wait an additional 3 seconds to ensure chests are processed
 
-    -- Now check if the folder is empty
     if #workspace.Objects.Drops:GetChildren() == 0 then
     
     end
 
-    -- After the folder is empty, trigger the auto replay
     if readyUI.Enabled and replayButton then
         print("Chests collected, starting auto-replay...")
 
@@ -477,19 +468,17 @@ local function autoReplay()
     end
 end
 
--- Create an Auto Replay Toggle in the UI
 Tab:CreateToggle({
     Name = "Auto Replay",
-    CurrentValue = config.autoreplayEnabled,  -- Default off state
+    CurrentValue = config.autoreplayEnabled, 
     Callback = function(State)
-        autoreplayEnabled = State  -- Toggle variable to track the state
+        autoreplayEnabled = State 
         config.autoreplayEnabled = State
         saveConfig()
     end
 })
 
 RunService.Heartbeat:Connect(function()
-    -- Only proceed if the toggle is enabled
     if autoreplayEnabled then
         wait(55)
         autoReplay()
@@ -498,31 +487,28 @@ end)
 
 
 
--- Create an Auto Boss Toggle in the UI
 Tab:CreateToggle({
     Name = "Auto Boss",
-    CurrentValue = config.autoBossEnabled,  -- Default off state
+    CurrentValue = config.autoBossEnabled, 
     Callback = function(State)
-        autoBossEnabled = State  -- Toggle variable to track the state
+        autoBossEnabled = State 
         config.autoBossEnabled = State
         saveConfig()
     end
 })
 
--- Tween to Boss function
 local function tweenToBoss()
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local bossSpawn = workspace.Objects.Spawns.BossSpawn
 
     if character and character.PrimaryPart and bossSpawn then
-        local offset = Vector3.new(0, 50, 0)  -- Optional offset if needed
-        local speed = 1000  -- Speed for tweening
+        local offset = Vector3.new(0, 50, 0)  
+        local speed = 1000 
         Tween(character.PrimaryPart, bossSpawn, speed, offset, true)
     end
 end
 
--- Insta-Kill and Tween to Mobs function
 local function performInstaKillAndTween()
     if not autoBossEnabled then return end
 
@@ -530,33 +516,30 @@ local function performInstaKillAndTween()
     local character = player.Character or player.CharacterAdded:Wait()
     local origin = character.PrimaryPart.Position
 
-    -- Tween to the boss spawn point if not already there
     if (workspace.Objects.Spawns.BossSpawn.Position - origin).Magnitude > 50 then
-        tweenToBoss()  -- This will move the player to the BossSpawn
+        tweenToBoss()
     end
 
     for _, mob in pairs(workspace.Objects.Mobs:GetChildren()) do
         if mob:IsA("Model") and mob.PrimaryPart then
             local distance = (mob.PrimaryPart.Position - origin).Magnitude
-            if distance <= 1000 then  -- Range of 1000 units
-                -- Insta-Kill logic
+            if distance <= 1000 then  
                 local humanoid = mob:FindFirstChildOfClass("Humanoid")
                 if humanoid then
                     humanoid.Health = 0
                 end
 
-                local offset = Vector3.new(0, 10, 0)  -- Offset on top of the mob
+                local offset = Vector3.new(0, 10, 0) 
                 Tween(character.PrimaryPart, mob.PrimaryPart, 500, offset, true)
             end
         end
     end
 end
 
--- Run the Insta-Kill and Tween logic when the Auto Boss toggle is enabled
 game:GetService("RunService").Stepped:Connect(function()
     if autoBossEnabled then
         wait(30)
-        performInstaKillAndTween()  -- Perform the action when the toggle is enabled
+        performInstaKillAndTween()
     end
 end)
 
