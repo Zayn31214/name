@@ -1,8 +1,5 @@
 --[[
 
-Luna Interface Suite
-by Nebula Softworks
-
 Main Credits
 
 Hunter (Nebula Softworks) | Designing And Programming | Main Developer
@@ -38,7 +35,6 @@ local Camera = workspace.CurrentCamera
 local CoreGui = game:GetService("CoreGui")
 
 local isStudio
-local website = "github.com/Nebula-Softworks"
 
 if RunService:IsStudio() then
 	isStudio = true
@@ -2501,7 +2497,7 @@ function Luna:CreateWindow(WindowSettings)
 		HomeTabSettings = Kwargify({
 			Icon = 1,
 			SupportedExecutors = {"Vega X", "Delta", "Nihon", "Xeno"}, -- THESE DEFAULTS ARE PLACEHOLDERS!! I DO NOT ADVERTISE THESE, THEY ARE JUS THE FIRST THAT CAME TO MIND. I HAVE NO IDEA WHETHER THEYA RE RATS (they prob are) AND IM NOT RESPONSIBLE IF U GET VIRUSES FROM INSTALLING AFTER SEEING THIS LIST
-			DiscordInvite = "noinvitelink" -- The disvord invite link. Do not include the link so for example if my invite was discord.gg/nebula I would put nebula
+			DiscordInvite = "noinvitelink" -- The disvord invite link. Do not include the link so for example if my invite wa I would put nebula
 		}, HomeTabSettings or {})
 
 		local HomeTab = {}
