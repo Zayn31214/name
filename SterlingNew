@@ -491,7 +491,7 @@ Tab:CreateToggle({
 RunService.Heartbeat:Connect(function()
     -- Only proceed if the toggle is enabled
     if autoreplayEnabled then
-        wait(45)
+        wait(55)
         autoReplay()
     end
 end)
@@ -535,7 +535,6 @@ local function performInstaKillAndTween()
         tweenToBoss()  -- This will move the player to the BossSpawn
     end
 
-    -- Insta-Kill and Tween to nearby mobs
     for _, mob in pairs(workspace.Objects.Mobs:GetChildren()) do
         if mob:IsA("Model") and mob.PrimaryPart then
             local distance = (mob.PrimaryPart.Position - origin).Magnitude
@@ -546,7 +545,6 @@ local function performInstaKillAndTween()
                     humanoid.Health = 0
                 end
 
-                -- Tween to the mob with "On Top" offset
                 local offset = Vector3.new(0, 10, 0)  -- Offset on top of the mob
                 Tween(character.PrimaryPart, mob.PrimaryPart, 500, offset, true)
             end
