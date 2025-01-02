@@ -516,7 +516,7 @@ local function tweenToBoss()
     local bossSpawn = workspace.Objects.Spawns.BossSpawn
 
     if character and character.PrimaryPart and bossSpawn then
-        local offset = Vector3.new(0, 0, 0)  -- Optional offset if needed
+        local offset = Vector3.new(0, 50, 0)  -- Optional offset if needed
         local speed = 1000  -- Speed for tweening
         Tween(character.PrimaryPart, bossSpawn, speed, offset, true)
     end
