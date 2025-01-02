@@ -1,9 +1,10 @@
-local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nebula-Softworks/Luna-Interface-Suite/refs/heads/main/source.lua"))()
+local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/Zayn31214/name/refs/heads/main/interface"))()
 
 local HttpService = game:GetService("HttpService")
 
 local configFile = "SterlingHubConfig.json"
 
+-- Default configuration
 local config = {
     instaLevelQuestEnabled = false,
     delayTime = 0,
@@ -28,6 +29,7 @@ local config = {
     autoreplayEnabled = false
 }
 
+-- Load configuration function
 local function loadConfig()
     if isfile(configFile) then
         local data = readfile(configFile)
@@ -36,22 +38,24 @@ local function loadConfig()
         end)
         if success then
             for k, v in pairs(result) do
-                config[k] = v 
+                config[k] = v  -- Update config fields directly
             end
         end
     end
 end
 
 local function saveConfig()
-    local data = game:GetService("HttpService"):JSONEncode(config)
+    local data = game:GetService("HttpService"):JSONEncode(config)  -- Encode the config directly
     writefile(configFile, data)
 end
 
+-- Save configuration function
 local function saveConfig()
-    local data = game:GetService("HttpService"):JSONEncode(config)
+    local data = game:GetService("HttpService"):JSONEncode(config)  -- Encode the config directly
     writefile(configFile, data)
 end
 
+-- Auto-load configuration on script start
 loadConfig()
 
 
@@ -59,21 +63,21 @@ loadConfig()
 local Window = Luna:CreateWindow({
     Name = "Sterling Hub",
     Subtitle = nil,
-    LogoID = "nil",
+    LogoID = "90804827107744",
     LoadingEnabled = true,
     LoadingTitle = "Sterling Hub",
     LoadingSubtitle = "by DAN",
 
     ConfigSettings = {
-		RootFolder = nil,
-		ConfigFolder = "Sterling Hub" 
+		RootFolder = nil, -- The Root Folder Is Only If You Have A Hub With Multiple Game Scripts and u may remove it. DO NOT ADD A SLASH
+		ConfigFolder = "Sterling Hub" -- The Name Of The Folder Where Luna Will Store Configs For This Script. DO NOT ADD A SLASH
     },
 })
 
 Window:CreateHomeTab({
-	SupportedExecutors = {},
-	DiscordInvite = "pvwpXmTmT7",
-	Icon = 1, 
+	SupportedExecutors = {}, -- A Table Of Executors Your Script Supports. Add strings of the executor names for each executor.
+	DiscordInvite = "pvwpXmTmT7", -- The Discord Invite Link. Do Not Include discord.gg/ | Only Include the code.
+	Icon = 1, -- By Default, The Icon Is The Home Icon. If You would like to change it to dashboard, replace the interger with 2
 })
 
 local Tab = Window:CreateTab({
@@ -110,7 +114,7 @@ Tab:CreateToggle({
 
 Tab:CreateSlider({
     Name = "Quest Delay (Seconds)",
-    Range = {0, 10},
+    Range = {0, 10},  -- Minimum delay
     Increment = 1,
     CurrentValue = config.delayTime,
     Callback = function(Value)
@@ -123,7 +127,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "EXP",
-    Range = {0, 8000000}, 
+    Range = {0, 8000000},  -- Minimum delay
     Increment = 1,
     CurrentValue = config.exp,
     Callback = function(Value)
@@ -136,7 +140,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "CASH",
-    Range = {0, 50000}, 
+    Range = {0, 50000},  -- Minimum delay
     Increment = 1,
     CurrentValue = config.cash,
     Callback = function(Value)
@@ -149,7 +153,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "ESSENCE",
-    Range = {0, 25},
+    Range = {0, 25},  -- Minimum delay
     Increment = 1,
     CurrentValue = config.missionessence,
     Callback = function(Value)
@@ -162,7 +166,7 @@ Tab:CreateSlider({
 
 Tab:CreateSlider({
     Name = "CHEST METER",
-    Range = {0, 75},
+    Range = {0, 75},  -- Minimum delay
     Increment = 1,
     CurrentValue = config.chestMeter,
     Callback = function(Value)
@@ -436,7 +440,7 @@ game:GetService("RunService").Stepped:Connect(function()
 end)
 
 Tab:CreateSection("Auto Boss")
-local delayTime = 0.5   
+local delayTime = 0.5    -- The delay time between actions
 local autoreplayEnabled = false
 
 local replayButton = game:GetService("Players").LocalPlayer.PlayerGui.ReadyScreen.Frame.Replay
@@ -445,13 +449,18 @@ local GuiService = game:GetService("GuiService")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local folder = workspace.Objects.Drops
 
+-- Function to Auto Replay after All Chests are Collected
 local function autoReplay()
+    -- Wait for the chest folder to be empty (all chests collected)
     print("Waiting for chests to be collected...")
+  -- Wait an additional 3 seconds to ensure chests are processed
 
+    -- Now check if the folder is empty
     if #workspace.Objects.Drops:GetChildren() == 0 then
     
     end
 
+    -- After the folder is empty, trigger the auto replay
     if readyUI.Enabled and replayButton then
         print("Chests collected, starting auto-replay...")
 
@@ -468,47 +477,52 @@ local function autoReplay()
     end
 end
 
+-- Create an Auto Replay Toggle in the UI
 Tab:CreateToggle({
     Name = "Auto Replay",
-    CurrentValue = config.autoreplayEnabled, 
+    CurrentValue = config.autoreplayEnabled,  -- Default off state
     Callback = function(State)
-        autoreplayEnabled = State 
+        autoreplayEnabled = State  -- Toggle variable to track the state
         config.autoreplayEnabled = State
         saveConfig()
     end
 })
 
 RunService.Heartbeat:Connect(function()
+    -- Only proceed if the toggle is enabled
     if autoreplayEnabled then
-        wait(55)
+        wait(45)
         autoReplay()
     end
 end)
 
 
 
+-- Create an Auto Boss Toggle in the UI
 Tab:CreateToggle({
     Name = "Auto Boss",
-    CurrentValue = config.autoBossEnabled, 
+    CurrentValue = config.autoBossEnabled,  -- Default off state
     Callback = function(State)
-        autoBossEnabled = State 
+        autoBossEnabled = State  -- Toggle variable to track the state
         config.autoBossEnabled = State
         saveConfig()
     end
 })
 
+-- Tween to Boss function
 local function tweenToBoss()
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local bossSpawn = workspace.Objects.Spawns.BossSpawn
 
     if character and character.PrimaryPart and bossSpawn then
-        local offset = Vector3.new(0, 50, 0)  
-        local speed = 1000 
+        local offset = Vector3.new(0, 20, 0)  -- Optional offset if needed
+        local speed = 1000  -- Speed for tweening
         Tween(character.PrimaryPart, bossSpawn, speed, offset, true)
     end
 end
 
+-- Insta-Kill and Tween to Mobs function
 local function performInstaKillAndTween()
     if not autoBossEnabled then return end
 
@@ -516,30 +530,34 @@ local function performInstaKillAndTween()
     local character = player.Character or player.CharacterAdded:Wait()
     local origin = character.PrimaryPart.Position
 
+    -- Tween to the boss spawn point if not already there
     if (workspace.Objects.Spawns.BossSpawn.Position - origin).Magnitude > 50 then
-        tweenToBoss()
+        tweenToBoss()  -- This will move the player to the BossSpawn
     end
 
+    -- Insta-Kill and Tween to nearby mobs
     for _, mob in pairs(workspace.Objects.Mobs:GetChildren()) do
         if mob:IsA("Model") and mob.PrimaryPart then
             local distance = (mob.PrimaryPart.Position - origin).Magnitude
-            if distance <= 1000 then  
+            if distance <= 1000 then  -- Range of 1000 units
+                -- Insta-Kill logic
                 local humanoid = mob:FindFirstChildOfClass("Humanoid")
                 if humanoid then
                     humanoid.Health = 0
                 end
 
-                local offset = Vector3.new(0, 10, 0) 
+                -- Tween to the mob with "On Top" offset
+                local offset = Vector3.new(0, 10, 0)  -- Offset on top of the mob
                 Tween(character.PrimaryPart, mob.PrimaryPart, 500, offset, true)
             end
         end
     end
 end
 
+-- Run the Insta-Kill and Tween logic when the Auto Boss toggle is enabled
 game:GetService("RunService").Stepped:Connect(function()
     if autoBossEnabled then
-        wait(30)
-        performInstaKillAndTween()
+        performInstaKillAndTween()  -- Perform the action when the toggle is enabled
     end
 end)
 
@@ -826,3 +844,102 @@ local Settings = Window:CreateTab({
     ImageSource = "Material",
     ShowTitle = true
 })
+
+local HttpService = game:GetService("HttpService")
+local url = ""
+
+local inputURL = Settings:CreateInput({
+    Name = "Enter Discord Webhook URL",
+    PlaceholderText = "Paste your Discord Webhook URL here",
+    CurrentValue = "",
+    Numeric = false,
+    Callback = function(Text)
+        url = Text
+    end,
+})
+
+-- Create confirm button
+local ConfirmButton = Settings:CreateButton({
+    Name = "Confirm Webhook URL",
+    Callback = function()
+        if url == "" then
+            -- Show error if URL is empty
+            Luna:Notification({
+                Title = "Error",
+                Icon = "error_outline",
+                ImageSource = "Material",
+                Content = "Please enter a valid Discord Webhook URL.",
+            })
+        else
+            -- URL is valid, proceed with using the webhook
+            print("Webhook URL confirmed:", url)
+            Luna:Notification({
+                Title = "Webhook Confirmed",
+                Icon = "check_circle",
+                ImageSource = "Material",
+                Content = "Discord Webhook URL has been confirmed.",
+            })
+        end
+    end,
+})
+
+
+-- Send embed message function
+function SendMessageEMBED(url, embed)
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+    local data = {
+        ["username"] = "Sterling Hub",
+        ["avatar_url"] = "https://imgur.com/5EKp1dm.png",
+        ["embeds"] = {
+            {
+                ["title"] = embed.title,
+                ["url"] = "https://discord.gg/pvwpXmTmT7"
+                ["description"] = embed.description,
+                ["color"] = embed.color,
+                ["fields"] = embed.fields,
+                ["footer"] = {
+                    ["text"] = embed.footer.text
+                }
+            }
+        }
+    }
+    local body = HttpService:JSONEncode(data)
+    local response = request({
+        Url = url,
+        Method = "POST",
+        Headers = headers,
+        Body = body
+    })
+    print("Sent")
+end
+
+-- Webhook logic for item collection (same as your original)
+for _, item in pairs(workspace.Objects.Drops:GetChildren()) do
+    local proximityPrompt = item:FindFirstChild("Collect")
+    if proximityPrompt then
+        proximityPrompt.Triggered:Connect(function(player)
+            local parentName = item.Name
+            local embed = {
+                ["title"] = parentName .. " Collected!",
+                ["description"] = player.Name .. " has collected " .. parentName,
+                ["color"] = 65280,  -- Green color
+                ["fields"] = {
+                    {
+                        ["name"] = "Player",
+                        ["value"] = player.Name
+                    },
+                    {
+                        ["name"] = "Item",
+                        ["value"] = parentName
+                    }
+                },
+                ["footer"] = {
+                    ["text"] = "https://discord.gg/pvwpXmTmT7"
+                }
+            }
+            SendMessageEMBED(url, embed)
+        end)
+    end
+end
