@@ -1,5 +1,65 @@
 local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nebula-Softworks/Luna-Interface-Suite/refs/heads/main/source.lua"))()
 
+local HttpService = game:GetService("HttpService")
+
+local configFile = "SterlingHubConfig.json"
+
+-- Default configuration
+local config = {
+    instaLevelQuestEnabled = false,
+    delayTime = 0,
+    exp = 0,
+    cash = 0,
+    missionessence = 0,
+    chestMeter = 0,
+    instaKillEnabled = false,
+    range = 0,
+    tweenToMobEnabled = false,
+    tweenSpeed = 0,
+    tweenRange = 0,
+    tweenPosition = "On Top",
+    positionOffset = 1,
+    autopromoteEnabled = false,
+    autoCollectEnabled = false,
+    cooldownToggle = false,
+    lastFired = 0,
+    collectdelayTime = 0,
+    flipDelayTime = 0,
+    autoBossEnabled = false,
+    autoreplayEnabled = false
+}
+
+-- Load configuration function
+local function loadConfig()
+    if isfile(configFile) then
+        local data = readfile(configFile)
+        local success, result = pcall(function()
+            return game:GetService("HttpService"):JSONDecode(data)
+        end)
+        if success then
+            for k, v in pairs(result) do
+                config[k] = v  -- Update config fields directly
+            end
+        end
+    end
+end
+
+local function saveConfig()
+    local data = game:GetService("HttpService"):JSONEncode(config)  -- Encode the config directly
+    writefile(configFile, data)
+end
+
+-- Save configuration function
+local function saveConfig()
+    local data = game:GetService("HttpService"):JSONEncode(config)  -- Encode the config directly
+    writefile(configFile, data)
+end
+
+-- Auto-load configuration on script start
+loadConfig()
+
+
+
 local Window = Luna:CreateWindow({
     Name = "Sterling Hub",
     Subtitle = nil,
@@ -8,6 +68,10 @@ local Window = Luna:CreateWindow({
     LoadingTitle = "Sterling Hub",
     LoadingSubtitle = "by DAN",
 
+    ConfigSettings = {
+		RootFolder = nil, -- The Root Folder Is Only If You Have A Hub With Multiple Game Scripts and u may remove it. DO NOT ADD A SLASH
+		ConfigFolder = "Sterling Hub" -- The Name Of The Folder Where Luna Will Store Configs For This Script. DO NOT ADD A SLASH
+    },
 })
 
 Window:CreateHomeTab({
@@ -42,6 +106,8 @@ Tab:CreateToggle({
     CurrentValue = instaLevelQuestEnabled,
     Callback = function(State)
         instaLevelQuestEnabled = State
+        config.instaLevelQuestEnabled = State
+        saveConfig()
     end
 })
 
@@ -50,9 +116,11 @@ Tab:CreateSlider({
     Name = "Quest Delay (Seconds)",
     Range = {0, 10},  -- Minimum delay
     Increment = 1,
-    CurrentValue = delayTime,
+    CurrentValue = config.delayTime,
     Callback = function(Value)
         delayTime = Value
+        config.delayTime = Value
+        saveConfig()
     end
 })
 
@@ -61,9 +129,11 @@ Tab:CreateSlider({
     Name = "EXP",
     Range = {0, 8000000},  -- Minimum delay
     Increment = 1,
-    CurrentValue = questParams.exp,
+    CurrentValue = config.exp,
     Callback = function(Value)
         questParams.exp = Value
+        config.exp = Value
+        saveConfig()
     end
 })
 
@@ -72,9 +142,11 @@ Tab:CreateSlider({
     Name = "CASH",
     Range = {0, 50000},  -- Minimum delay
     Increment = 1,
-    CurrentValue = questParams.cash,
+    CurrentValue = config.cash,
     Callback = function(Value)
         questParams.cash = Value
+        config.cash = Value
+        saveConfig()
     end
 })
 
@@ -83,9 +155,11 @@ Tab:CreateSlider({
     Name = "ESSENCE",
     Range = {0, 25},  -- Minimum delay
     Increment = 1,
-    CurrentValue = questParams.essence,
+    CurrentValue = config.missionessence,
     Callback = function(Value)
         questParams.essence = Value
+        config.missionessence = Value
+        saveConfig()
     end
 })
 
@@ -94,9 +168,11 @@ Tab:CreateSlider({
     Name = "CHEST METER",
     Range = {0, 75},  -- Minimum delay
     Increment = 1,
-    CurrentValue = questParams.chestMeter,
+    CurrentValue = config.chestMeter,
     Callback = function(Value)
         questParams.chestMeter = Value
+        config.chestMeter = Value
+        saveConfig()
     end
 })
 
@@ -192,26 +268,30 @@ end)
 Tab:CreateSection("Instakill")
 
 local instaKillEnabled = false
-local range = 50
+local range = 0
 local tweenToMobEnabled = false
-local tweenSpeed = 2
-local tweenRange = 50
+local tweenSpeed = 0
+local tweenRange = 0
+
+Tab:CreateToggle({
+    Name = "Enable Insta-Kill",
+    CurrentValue = config.instaKillEnabled,
+    Callback = function(State)
+        instaKillEnabled = State
+        config.instaKillEnabled = State
+        saveConfig()
+    end
+})
 
 Tab:CreateSlider({
     Name = "Kill Range",
     Range = {10, 1000},
-    Increment = 5,
-    CurrentValue = range,
+    Increment = 1,
+    CurrentValue = config.range,
     Callback = function(Value)
         range = Value
-    end
-})
-
-Tab:CreateToggle({
-    Name = "Enable Insta-Kill",
-    CurrentValue = false,
-    Callback = function(State)
-        instaKillEnabled = State
+        config.range = Value
+        saveConfig()
     end
 })
 
@@ -219,9 +299,11 @@ Tab:CreateSection("Tweening")
 
 Tab:CreateToggle({
     Name = "Tween to Near Mobs",
-    CurrentValue = false,
+    CurrentValue = config.tweenToMobEnabled,
     Callback = function(State)
         tweenToMobEnabled = State
+        config.tweenToMobEnabled = State
+        saveConfig()
     end
 })
 
@@ -229,9 +311,11 @@ Tab:CreateSlider({
     Name = "Tweening Range",
     Range = {5, 5000},
     Increment = 5,
-    CurrentValue = tweenRange,
+    CurrentValue = config.tweenRange,
     Callback = function(Value)
         tweenRange = Value
+        config.tweenRange = Value
+        saveConfig()
     end
 })
 
@@ -239,9 +323,11 @@ Tab:CreateSlider({
     Name = "Tween Speed",
     Range = {0.5, 5000},
     Increment = 1,
-    CurrentValue = tweenSpeed,
+    CurrentValue = config.tweenSpeed,
     Callback = function(Value)
         tweenSpeed = Value
+        config.tweenSpeed = Value
+        saveConfig()
     end
 })
 
@@ -353,6 +439,130 @@ game:GetService("RunService").Stepped:Connect(function()
     end
 end)
 
+Tab:CreateSection("Auto Boss")
+local delayTime = 0.5    -- The delay time between actions
+local autoreplayEnabled = false
+
+local replayButton = game:GetService("Players").LocalPlayer.PlayerGui.ReadyScreen.Frame.Replay
+local readyUI = game:GetService("Players").LocalPlayer.PlayerGui.ReadyScreen
+local GuiService = game:GetService("GuiService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local folder = workspace.Objects.Drops
+
+-- Function to Auto Replay after All Chests are Collected
+local function autoReplay()
+    -- Wait for the chest folder to be empty (all chests collected)
+    print("Waiting for chests to be collected...")
+  -- Wait an additional 3 seconds to ensure chests are processed
+
+    -- Now check if the folder is empty
+    if #workspace.Objects.Drops:GetChildren() == 0 then
+    
+    end
+
+    -- After the folder is empty, trigger the auto replay
+    if readyUI.Enabled and replayButton then
+        print("Chests collected, starting auto-replay...")
+
+        GuiService.SelectedObject = replayButton
+        VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
+        wait(delayTime)
+        VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+        wait(delayTime)
+        VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.BackSlash, false, game)
+        wait()
+        VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.BackSlash, false, game)
+    else
+        print("Replay button or UI not available.")
+    end
+end
+
+-- Create an Auto Replay Toggle in the UI
+Tab:CreateToggle({
+    Name = "Auto Replay",
+    CurrentValue = config.autoreplayEnabled,  -- Default off state
+    Callback = function(State)
+        autoreplayEnabled = State  -- Toggle variable to track the state
+        config.autoreplayEnabled = State
+        saveConfig()
+    end
+})
+
+RunService.Heartbeat:Connect(function()
+    -- Only proceed if the toggle is enabled
+    if autoreplayEnabled then
+        wait(45)
+        autoReplay()
+    end
+end)
+
+
+
+-- Create an Auto Boss Toggle in the UI
+Tab:CreateToggle({
+    Name = "Auto Boss",
+    CurrentValue = config.autoBossEnabled,  -- Default off state
+    Callback = function(State)
+        autoBossEnabled = State  -- Toggle variable to track the state
+        config.autoBossEnabled = State
+        saveConfig()
+    end
+})
+
+-- Tween to Boss function
+local function tweenToBoss()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local bossSpawn = workspace.Objects.Spawns.BossSpawn
+
+    if character and character.PrimaryPart and bossSpawn then
+        local offset = Vector3.new(0, 0, 0)  -- Optional offset if needed
+        local speed = 1000  -- Speed for tweening
+        Tween(character.PrimaryPart, bossSpawn, speed, offset, true)
+    end
+end
+
+-- Insta-Kill and Tween to Mobs function
+local function performInstaKillAndTween()
+    if not autoBossEnabled then return end
+
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local origin = character.PrimaryPart.Position
+
+    -- Tween to the boss spawn point if not already there
+    if (workspace.Objects.Spawns.BossSpawn.Position - origin).Magnitude > 50 then
+        tweenToBoss()  -- This will move the player to the BossSpawn
+    end
+
+    -- Insta-Kill and Tween to nearby mobs
+    for _, mob in pairs(workspace.Objects.Mobs:GetChildren()) do
+        if mob:IsA("Model") and mob.PrimaryPart then
+            local distance = (mob.PrimaryPart.Position - origin).Magnitude
+            if distance <= 1000 then  -- Range of 1000 units
+                -- Insta-Kill logic
+                local humanoid = mob:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    humanoid.Health = 0
+                end
+
+                -- Tween to the mob with "On Top" offset
+                local offset = Vector3.new(0, 10, 0)  -- Offset on top of the mob
+                Tween(character.PrimaryPart, mob.PrimaryPart, 500, offset, true)
+            end
+        end
+    end
+end
+
+-- Run the Insta-Kill and Tween logic when the Auto Boss toggle is enabled
+game:GetService("RunService").Stepped:Connect(function()
+    if autoBossEnabled then
+        wait(30)
+        performInstaKillAndTween()  -- Perform the action when the toggle is enabled
+    end
+end)
+
+
 local Misc = Window:CreateTab({
     Name = "Misc",
     Icon = "view_in_ar",
@@ -384,44 +594,89 @@ game:GetService("RunService").Heartbeat:Connect(function()
     performautopromote()
 end)
 
-local autoCollectEnabled = false 
-local delayTime = 0  
-local lastFired = 0 
+local autoCollectEnabled = false
+local collectdelayTime = 0
+local flipDelayTime = 0 
+local lastFired = 0
 local ProximityPromptService = game:GetService("ProximityPromptService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
+local lootUI = game:GetService("Players").LocalPlayer.PlayerGui.Loot
+local GuiService = game:GetService("GuiService")
+local flipButton = game.Players.LocalPlayer.PlayerGui.Loot.Frame.Flip
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local lastFlipTime = 0
+local flipDelay = 0.5
 
-Misc:CreateToggle({
-    Name = "Auto Collect Chest (Turn on your autoclicker)",
-    CurrentValue = autoCollectEnabled,
+
+local function autoFlip()
+    local currentTime = tick()  -- Get the current time
+    if currentTime - lastFlipTime >= flipDelay then
+      GuiService.SelectedObject = flipButton
+      VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
+      wait(flipDelayTime)
+      VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+      wait(flipDelayTime)
+      VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.BackSlash, false, game)
+      wait(flipDelayTime)
+      VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.BackSlash, false, game)
+
+      lastFlipTime = currentTime
+
+    end
+end
+
+local Toggle = Misc:CreateToggle({
+    Name = "Auto Collect",
+    CurrentValue = config.autoCollectEnabled,
     Callback = function(Value)
         autoCollectEnabled = Value
+        config.autoCollectEnabled = Value
+        saveConfig()
     end
 })
 
-
-Misc:CreateSlider({
-    Name = "Fire Proximity Prompt Delay (Seconds)",
-    Min = 0,  -- Minimum delay (no delay)
-    Max = 10, 
-    CurrentValue = delayTime,  -- Initial value
+local Slider = Misc:CreateSlider({
+    Name = "Collect Chest Delay",
+    Range = {0, 10},
+    Increment = 1,
+    CurrentValue = collectdelayTime,
     Callback = function(Value)
-        delayTime = Value 
+        collectdelayTime = Value
+        config.collectdelayTime = Value
+        saveConfig()
     end
 })
 
+local Slider = Misc:CreateSlider({
+    Name = "Flip Delay",
+    Range = {0, 10},
+    Increment = 1,
+    CurrentValue = flipDelayTime,  -- Initial value
+    Callback = function(Value)
+        flipDelayTime = Value
+        config.flipDelayTime = Value
+        saveConfig()
+    end
+})
 
 ProximityPromptService.PromptShown:Connect(function(prompt)
-    local currentTime = tick()  -- Get the current time
+    local currentTime = tick() 
 
-    -- Check if enough time has passed since the last prompt was fired
-    if autoCollectEnabled and (currentTime - lastFired >= delayTime) then
+    if autoCollectEnabled and (currentTime - lastFired >= collectdelayTime) then
         fireproximityprompt(prompt)
-        
-
         lastFired = currentTime
     end
 end)
+
+RunService.Heartbeat:Connect(function()
+    if autoCollectEnabled then
+        if lootUI.Enabled == true then
+            autoFlip()
+        end
+    end
+end)
+
 
 
 Misc:CreateSection("Free Innate Slots, Skip Spins")
@@ -581,4 +836,12 @@ local Button = Tab:CreateButton({
             warn("Please enter a move name!")
         end
     end,
+})
+
+
+local Settings = Window:CreateTab({
+    Name = "Settings",
+    Icon = "view_in_ar",
+    ImageSource = "Material",
+    ShowTitle = true
 })
