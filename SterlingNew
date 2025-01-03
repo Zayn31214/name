@@ -210,7 +210,7 @@ local function tweenToPortal()
         Tween(character.PrimaryPart, missionPortal, speed, offset, true)
     end
 end
-tweenToPortal()          
+tweenToPortal()
             
             wait(delayTime)
 
@@ -569,6 +569,49 @@ local Misc = Window:CreateTab({
     ShowTitle = true
 })
 
+local TweenService = game:GetService("TweenService")
+local autocollectToolsEnabled = false
+
+Tab:CreateToggle({
+    Name = "Auto Collect Loots",
+    CurrentValue = autocollectToolsEnabled,
+    Callback = function(State)
+        autocollectToolsEnabled = State
+        if State then
+            while autocollectToolsEnabled do
+                tweenToLoot()
+                task.wait(1) -- Adjust delay to prevent performance issues
+            end
+        end
+    end
+})
+
+local function Tween(Object1, Object2, Speed, Offset, Wait)
+    if Object1 and Object2 then
+        local Timing = (Object1.Position - Object2.Position).Magnitude / Speed
+        local TweenInfo = TweenInfo.new(Timing, Enum.EasingStyle.Linear)
+        local TweenSystem = TweenService:Create(Object1, TweenInfo, {CFrame = Object2.CFrame + Offset})
+        TweenSystem:Play()
+        if Wait then
+            TweenSystem.Completed:Wait()
+        end
+    end
+end
+
+local function tweenToLoot()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+
+    if autocollectToolsEnabled and character and character.PrimaryPart then
+        for _, obj in pairs(workspace.Objects:GetChildren()) do
+            if obj:IsA("Part") then
+                local offset = Vector3.new(0, 0, 0)  -- Customize if needed
+                local speed = 500  -- Adjust tweening speed
+                Tween(character.PrimaryPart, obj, speed, offset, true)
+            end
+        end
+    end
+end
 
 
 local autopromoteEnabled = false
@@ -895,7 +938,7 @@ function SendMessageEMBED(url, embed)
         ["embeds"] = {
             {
                 ["title"] = embed.title,
-                ["url"] = "https://discord.gg/pvwpXmTmT7"
+                ["url"] = "https://discord.gg/pvwpXmTmT7",
                 ["description"] = embed.description,
                 ["color"] = embed.color,
                 ["fields"] = embed.fields,
