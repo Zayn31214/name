@@ -557,7 +557,7 @@ end
 -- Run the Insta-Kill and Tween logic when the Auto Boss toggle is enabled
 game:GetService("RunService").Stepped:Connect(function()
     if autoBossEnabled then
-        wait(45
+        wait(30)
         performInstaKillAndTween()  -- Perform the action when the toggle is enabled
     end
 end)
