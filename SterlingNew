@@ -1,64 +1,125 @@
-local KeyGuardLibrary = loadstring(game:HttpGet("https://cdn.keyguardian.org/library/v1.0.0.lua"))()
-local trueData = "5a95fc849a1f4dc983cdf648acd41149"
-local falseData = "375afd3973424d1185a291ff31514ced"
+local HttpService = game:GetService("HttpService")
+local configFile = "SterlingHubConfig.json"
 
-KeyGuardLibrary.Set({
-  publicToken = "9de5640aa142461480443e9dfa551890",
-  privateToken = "aed818a6f7f8460dbe8724d3504548ea",
-  trueData = trueData,
-  falseData = falseData,
-})
-
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local key = ""
-
-local Window = Fluent:CreateWindow({
-    Title = "Key System",
-    SubTitle = "SterlingHub",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(580, 340),
-    Acrylic = false,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl
-})
-
-local Tabs = {
-    KeySys = Window:AddTab({ Title = "Key System", Icon = "key" }),
+-- Default configuration
+local config = {
+    key = "",  -- Store the key here
+    
 }
 
-local Entkey = Tabs.KeySys:AddInput("Input", {
-    Title = "Enter Key",
-    Description = "Enter Key Here",
-    Default = "",
-    Placeholder = "Enter key…",
-    Numeric = false,
-    Finished = false,
-    Callback = function(Value)
-        key = Value
-    end
-})
-
-local Checkkey = Tabs.KeySys:AddButton({
-    Title = "Check Key",
-    Description = "Enter Key before pressing this button",
-    Callback = function()
-        local response = KeyGuardLibrary.validateDefaultKey(key)
-        if response == trueData then
-           print("Key is valid")
-           loadstring(game:HttpGet("https://raw.githubusercontent.com/Zayn312142/thing/refs/heads/main/crypto"))() 
-
-        else
-           print("Key is invalid")
+-- Load configuration function
+local function loadConfig()
+    if isfile(configFile) then
+        local data = readfile(configFile)
+        local success, result = pcall(function()
+            return HttpService:JSONDecode(data)
+        end)
+        if success then
+            for k, v in pairs(result) do
+                config[k] = v  -- Update config fields directly
+            end
         end
     end
-})
+end
 
-local Getkey = Tabs.KeySys:AddButton({
-    Title = "Get Key",
-    Description = "Get Key here",
-    Callback = function()
-       setclipboard(KeyGuardLibrary.getLink())
+-- Save configuration function
+local function saveConfig()
+    local data = HttpService:JSONEncode(config)  -- Encode the config directly
+    writefile(configFile, data)
+end
+
+-- Function to validate key
+local function validateKey(key)
+    local KeyGuardLibrary = loadstring(game:HttpGet("https://cdn.keyguardian.org/library/v1.0.0.lua"))()
+    local trueData = "5a95fc849a1f4dc983cdf648acd41149"
+    local falseData = "375afd3973424d1185a291ff31514ced"
+
+    KeyGuardLibrary.Set({
+        publicToken = "9de5640aa142461480443e9dfa551890",
+        privateToken = "aed818a6f7f8460dbe8724d3504548ea",
+        trueData = trueData,
+        falseData = falseData,
+    })
+
+    local response = KeyGuardLibrary.validateDefaultKey(key)
+    if response == trueData then
+        print("Key is valid")
+        return true
+    else
+        print("Key is invalid")
+        return false
     end
-})
+end
 
-Window:SelectTab(1)
+-- Auto-load configuration on script start
+loadConfig()
+
+-- Show key input window if key is invalid or expired
+if config.key ~= "" then
+    if not validateKey(config.key) then
+        -- If key is invalid, show the key input window
+        print("Key expired or invalid. Please enter a new key.")
+        config.key = ""  -- Clear invalid key
+        saveConfig()  -- Save the empty key to the config file
+    else
+        -- If key is valid, proceed with the process
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Zayn312142/thing/refs/heads/main/crypto"))()
+    end
+end
+
+if config.key == "" then
+    -- Provide the user the ability to enter a key manually
+    local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+    local key = ""
+
+    local Window = Fluent:CreateWindow({
+        Title = "Key System",
+        SubTitle = "SterlingHub",
+        TabWidth = 160,
+        Size = UDim2.fromOffset(580, 340),
+        Acrylic = false,
+        Theme = "Dark",
+        MinimizeKey = Enum.KeyCode.LeftControl
+    })
+
+    local Tabs = {
+        KeySys = Window:AddTab({ Title = "Key System", Icon = "key" }),
+    }
+
+    local Entkey = Tabs.KeySys:AddInput("Input", {
+        Title = "Enter Key",
+        Description = "Enter Key Here",
+        Default = "",
+        Placeholder = "Enter key…",
+        Numeric = false,
+        Finished = false,
+        Callback = function(Value)
+            key = Value
+        end
+    })
+
+    local Checkkey = Tabs.KeySys:AddButton({
+        Title = "Check Key",
+        Description = "Enter Key before pressing this button",
+        Callback = function()
+            if validateKey(key) then
+                -- Save the key in the config if valid
+                config.key = key
+                saveConfig()  -- Save the configuration
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/Zayn312142/thing/refs/heads/main/crypto"))()
+            else
+                print("Key is invalid")
+            end
+        end
+    })
+
+    local Getkey = Tabs.KeySys:AddButton({
+        Title = "Get Key",
+        Description = "Get Key here",
+        Callback = function()
+            setclipboard(KeyGuardLibrary.getLink())
+        end
+    })
+
+    Window:SelectTab(1)
+end
