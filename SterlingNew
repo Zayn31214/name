@@ -13,7 +13,7 @@ local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/
 local key = ""
 
 -- Define your pre-set key
-local script_key = "KEY_c90332bbf1634b138437e4c252c5fc7d" -- Replace this with your desired key
+local script_key = "" -- Replace this with your desired key
 
 local Window = Fluent:CreateWindow({
     Title = "Key System",
