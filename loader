@@ -1,11 +1,11 @@
 local ID = game.PlaceId
-local baseURL = "https://raw.githubusercontent.com/meobeo8/elgato/a/"
+local baseURL = "https://raw.githubusercontent.com/Zayn31214/name/refs/heads/main/"
 local Players = game:GetService("Players")
 local plr = Players.LocalPlayer
 
 function GetGame()
     elseif ID == 10450270085 or ID == 16379688837 or ID == 119359147980471 or ID == 16379684339 or ID == 78904562518018 then 
-        return "JujutsuInfinite.lua"
+        return "JujutsuInfinite"
     else
        print("dont support")
         return nil
