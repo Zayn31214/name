@@ -4,10 +4,13 @@ local Players = game:GetService("Players")
 local plr = Players.LocalPlayer
 
 function GetGame()
-    if ID == 10450270085 or ID == 16379688837 or ID == 119359147980471 or ID == 16379684339 or ID == 78904562518018 then 
+    if ID == 10450270085 or ID == 16379688837 or ID == 119359147980471 or ID == 16379684339 or ID == 78904562518018 then
         return "JujutsuInfinite.lua"
+    -- New game added here
+    elseif ID == 126130304767531 then 
+        return "MallDrifters.lua" 
     else
-        print("dont support")
+        print("Game is not supported.")
         return nil
     end
 end
