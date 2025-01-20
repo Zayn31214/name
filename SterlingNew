@@ -8,7 +8,7 @@ function GetGame()
         return "JujutsuInfinite.lua"
     elseif ID == 126130304767531 then 
         return "MallDrifters.lua" 
-    elseif ID == 73956553001240 then
+    elseif ID == 73956553001240 or ID == 134314141048307 then
         return "HaikyuLegends.lua"
     else
         print("Game is not supported.")
