@@ -59,7 +59,7 @@ end)
 spawn(function()
     while wait(0.1) do
         pcall(function()
-            setfpscap(90)
+            setfpscap(1000)
         end)
     end
 end)
