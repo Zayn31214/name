@@ -4,10 +4,8 @@ local Players = game:GetService("Players")
 local plr = Players.LocalPlayer
 
 function GetGame()
-    if ID == 10450270085 or ID == 16379688837 or ID == 119359147980471 or ID == 16379684339 or ID == 78904562518018 then
-        return "JujutsuInfinite.lua"
-    elseif ID == 126130304767531 then 
-        return "MallDrifters.lua" 
+    if ID == 126130304767531 then
+        return "MallDrifters.lua"
     elseif ID == 73956553001240 or ID == 134314141048307 then
         return "HaikyuLegends.lua"
     else
