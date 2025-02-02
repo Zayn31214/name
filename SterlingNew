@@ -10,7 +10,8 @@ function GetGame()
         return "HaikyuLegends.lua"
     elseif ID == 126130304767531 then
         return "MallDrifters.lua"
-    else
+    elseif ID == 100400297022629 then
+        return "DuelWarriors.lua"
         print("Game is not supported.")
         return nil
     end
