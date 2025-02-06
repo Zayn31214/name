@@ -11,7 +11,7 @@ function GetGame()
     elseif ID == 126130304767531 then
         return "MallDrifters.lua"
     elseif ID == 115815718131154 then
-        return "JujutsuInfinite.lua"
+        return "Kuroko.lua"
     elseif ID == 100400297022629 then
         return "DuelWarriors.lua"
     else
