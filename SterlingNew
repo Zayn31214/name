@@ -12,8 +12,6 @@ function GetGame()
         return "MallDrifters.lua"
     elseif ID == 115815718131154 then
         return "Kuroko.lua"
-    elseif ID == 100400297022629 then
-        return "DuelWarriors.lua"
     elseif ID == 86789627188240 then
         return "HaikyuLegendsAfk.lua"
     elseif ID == 18668065416 then
