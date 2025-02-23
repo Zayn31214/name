@@ -16,6 +16,8 @@ function GetGame()
         return "HaikyuLegendsAfk.lua"
     elseif ID == 18668065416 or ID == 92517437168342 or ID == 82577947590704 or ID == 99999183305180 or ID == 115110570222234 or ID == 140149476595556
         return "BLR.lua"
+    elseif ID == 10290054819 then
+        return "Rune.lua"
     else
         print("Game is not supported.")
         return nil
