@@ -51,7 +51,6 @@ plr.Idled:Connect(function()
 end)
 
 task.wait(2)
-local Players = game:GetService("Players")
 local TeleportService = game:GetService("TeleportService")
 local LocalPlayer = Players.LocalPlayer
 local TargetGameId = 115110570222234 
