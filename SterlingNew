@@ -51,41 +51,54 @@ plr.Idled:Connect(function()
 end)
 
 task.wait(2)
+local Players = game:GetService("Players")
 local TeleportService = game:GetService("TeleportService")
 local LocalPlayer = Players.LocalPlayer
-local TargetGameId = 115110570222234 
+local TargetGameId = 115110570222234
 
-if not LocalPlayer:FindFirstChild("PlayerGui") then
-    LocalPlayer:WaitForChild("PlayerGui")
+local function waitForYenLabel()
+    while true do
+        yenLabel = LocalPlayer:FindFirstChild("PlayerGui")
+            and LocalPlayer.PlayerGui:FindFirstChild("HUD")
+            and LocalPlayer.PlayerGui.HUD:FindFirstChild("Top")
+            and LocalPlayer.PlayerGui.HUD.Top:FindFirstChild("Currencies")
+            and LocalPlayer.PlayerGui.HUD.Top.Currencies:FindFirstChild("Yen")
+            and LocalPlayer.PlayerGui.HUD.Top.Currencies.Yen:FindFirstChild("Amount")
+
+        if yenLabel and yenLabel:IsA("TextLabel") then break end
+        task.wait(1)
+    end
 end
-
-local yenLabel
-repeat
-    task.wait(1)
-    pcall(function()
-        yenLabel = LocalPlayer.PlayerGui.HUD.Top.Currencies.Yen.Amount
-    end)
-until yenLabel and yenLabel:IsA("TextLabel")
-
+waitForYenLabel()
 
 local function getYenAmount()
-    local yenText = yenLabel.Text:gsub("[^%d]", "")     return tonumber(yenText) end
+    local yenText = yenLabel.Text:gsub("[^%d]", "")
+    return tonumber(yenText)
+end
+
+local function safeTeleport()
+    local success, err = pcall(function()
+        TeleportService:Teleport(TargetGameId, LocalPlayer)
+    end)
+    if not success then
+    end
+end
 
 local initialYen = getYenAmount()
 if initialYen and initialYen == 100 then
-    print("tp")
-    TeleportService:Teleport(TargetGameId, LocalPlayer)
+    safeTeleport()
 end
 
 task.spawn(function()
-    while true do
+    local attempts = 0
+    while attempts < 5 do
         local yen = getYenAmount()
-        print("tp")
-
         if yen and yen == 100 then
-            print("tp", TargetGameId)
-            TeleportService:Teleport(TargetGameId, LocalPlayer)
+            safeTeleport()
             break
         end
-        task.wait(1)     end
+        attempts = attempts + 1
+        task.wait(1)
+    end
 end)
+
