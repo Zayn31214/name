@@ -54,35 +54,36 @@ task.wait(2)
 local TeleportService = game:GetService("TeleportService")
 local LocalPlayer = Players.LocalPlayer
 local TargetGameId = 115110570222234 
-print("Script started...")
+
 if not LocalPlayer:FindFirstChild("PlayerGui") then
-    print("Waiting for PlayerGui...")
     LocalPlayer:WaitForChild("PlayerGui")
 end
-print("PlayerGui loaded.")
+
 local yenLabel
 repeat
     task.wait(1)
     pcall(function()
         yenLabel = LocalPlayer.PlayerGui.HUD.Top.Currencies.Yen.Amount
     end)
-    print("Checking for Yen Amount label...")
 until yenLabel and yenLabel:IsA("TextLabel")
-print("Yen Amount label found")
+
+
 local function getYenAmount()
     local yenText = yenLabel.Text:gsub("[^%d]", "")     return tonumber(yenText) end
+
 local initialYen = getYenAmount()
-print("Initial Yen:", initialYen)
 if initialYen and initialYen == 100 then
-    print("Yen is already 100 Teleporting...")
+    print("tp")
     TeleportService:Teleport(TargetGameId, LocalPlayer)
 end
+
 task.spawn(function()
     while true do
         local yen = getYenAmount()
-        print("Checking Yen:", yenLabel.Text, "-> Extracted:", yen)
+        print("tp")
+
         if yen and yen == 100 then
-            print("Yen is exactly 100 Teleporting to game ID:", TargetGameId)
+            print("tp", TargetGameId)
             TeleportService:Teleport(TargetGameId, LocalPlayer)
             break
         end
