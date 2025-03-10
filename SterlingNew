@@ -54,19 +54,12 @@ local Players = game:GetService("Players")
 local TeleportService = game:GetService("TeleportService")
 local LocalPlayer = Players.LocalPlayer
 local TargetGameId = 115110570222234 
-
-getgenv().prvntdata = getgenv().prvntdata or false 
-
-print("Script started... prvntdata =", getgenv().prvntdata)
-
-
+print("Script started...")
 if not LocalPlayer:FindFirstChild("PlayerGui") then
     print("Waiting for PlayerGui...")
     LocalPlayer:WaitForChild("PlayerGui")
 end
 print("PlayerGui loaded.")
-
-
 local yenLabel
 repeat
     task.wait(1)
@@ -75,44 +68,24 @@ repeat
     end)
     print("Checking for Yen Amount label...")
 until yenLabel and yenLabel:IsA("TextLabel")
-
 print("Yen Amount label found")
-
-
 local function getYenAmount()
-    local yenText = yenLabel.Text:gsub("[^%d]", "") 
-    return tonumber(yenText) 
-end
-
-
+    local yenText = yenLabel.Text:gsub("[^%d]", "")     return tonumber(yenText) end
 local initialYen = getYenAmount()
 print("Initial Yen:", initialYen)
-
 if initialYen and initialYen == 100 then
-    if getgenv().prvntdata then
-        print("prvntdata is enabled Preventing teleport.")
-    else
-        print("Yen is already 100 Teleporting...")
-        TeleportService:Teleport(TargetGameId, LocalPlayer)
-    end
+    print("Yen is already 100 Teleporting...")
+    TeleportService:Teleport(TargetGameId, LocalPlayer)
 end
-
-
 task.spawn(function()
     while true do
         local yen = getYenAmount()
         print("Checking Yen:", yenLabel.Text, "-> Extracted:", yen)
-
         if yen and yen == 100 then
-            if getgenv().prvntdata then
-                print("prvntdata is enabled Preventing teleport.")
-            else
-                print("Yen is exactly 100 Teleporting to game ID:", TargetGameId)
-                TeleportService:Teleport(TargetGameId, LocalPlayer)
-            end
+            print("Yen is exactly 100 Teleporting to game ID:", TargetGameId)
+            TeleportService:Teleport(TargetGameId, LocalPlayer)
             break
         end
-        task.wait(1) 
-    end
+        task.wait(1)     end
 end)
 
