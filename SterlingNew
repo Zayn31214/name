@@ -73,17 +73,13 @@ local function getYenAmount()
 
 local initialYen = getYenAmount()
 if initialYen and initialYen == 100 then
-    print("tp")
     TeleportService:Teleport(TargetGameId, LocalPlayer)
 end
 
 task.spawn(function()
     while true do
         local yen = getYenAmount()
-        print("tp")
-
         if yen and yen == 100 then
-            print("tp", TargetGameId)
             TeleportService:Teleport(TargetGameId, LocalPlayer)
             break
         end
