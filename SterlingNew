@@ -16,6 +16,8 @@ function GetGame()
         return "BLR.lua"
     elseif ID == 99995671928896 or ID == 10290054819 then
         return "Rune.lua"
+    elseif ID -- 8075399143 then
+        return "NinjaTime.lua"
     else
         print("Game is not supported.")
         return nil
