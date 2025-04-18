@@ -16,6 +16,8 @@ function GetGame()
         return "Rune.lua"
     elseif ID == 8075399143 then
         return "NinjaTime.lua"
+    elseif ID == 94647229517154 then
+        return "AzureLatch.lua"
     else
         print("Game is not supported.")
         return nil
