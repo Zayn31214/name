@@ -20,7 +20,7 @@ function GetGame()
         return "AzureLatch.lua"
     elseif ID == 122678592501168 then
         return "beaks.lua"
-    elseif ID == 130739873848552 then
+    elseif ID == 130739873848552 or ID == 129230994638464 then
         return "BBZ.lua"
     else
         print("Game is not supported.")
