@@ -1,27 +1,5 @@
 getgenv().STERLINGLOADERINSTANCES = getgenv().STERLINGLOADERINSTANCES or {}
 
-if getgenv().STERLINGLOADERINSTANCES and not getmetatable(getgenv().STERLINGLOADERINSTANCES) then
-	setmetatable(getgenv().STERLINGLOADERINSTANCES, {
-		__index = function(self, key)
-			if key == "Len" then
-				local Len = 0
-
-				for i, v in pairs(self) do
-					Len = Len + 1
-				end
-
-				return Len
-			end
-
-			return rawget(self, key)
-		end;
-	})
-elseif getgenv().STERLINGLOADERINSTANCES and getmetatable(getgenv().STERLINGLOADERINSTANCES) then
-	if getgenv().STERLINGLOADED then
-		warn("An instance is already running.")
-	end
-end
-
 script_key=script_key or "";
 
 getgenv().STERLINGSETTINGS = getgenv().STERLINGSETTINGS or {
@@ -102,7 +80,7 @@ end
 local Dir = ("%s/Loader"):format(RootDir)
 
 if not (isfile(Dir) or isfolder(Dir)) then
-	makefolder(Dir)
+	makefolder(Dir)	
 end
 
 local Data = {
