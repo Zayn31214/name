@@ -253,7 +253,7 @@ local LoadFunction = function(Library, Window)
 end
 
 local Settings = {
-        InviteCode = "Edw24TucqG" -- the code at the end of the invite here
+        InviteCode = "Edw24TucqG"
     }
 local DiscordApiUrl = "http://127.0.0.1:%s/rpc?v=1"
 	local Window = Library:CreateWindow({
@@ -488,7 +488,7 @@ local DiscordApiUrl = "http://127.0.0.1:%s/rpc?v=1"
 				        local Main = Settings:Section({ 
                         Title = "Settings",
                         TextXAlignment = "Left",
-                        TextSize = 17, -- Default Size
+                        TextSize = 17, 
                     })
                     
 					Interfaces.Main.Button["Save-Settings"] = Settings:Button({
