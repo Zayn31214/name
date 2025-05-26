@@ -395,8 +395,8 @@ local DiscordApiUrl = "http://127.0.0.1:%s/rpc?v=1"
 
 
                     local Button = Load:Button({
-                    Title = "Load",
-                    Description = "Load Key",
+                    Title = "Enter key",
+                    Description = "Enters Key",
                     Callback = function()
                         script_key = Cache.script_key
 
