@@ -1,5 +1,27 @@
 getgenv().STERLINGLOADERINSTANCES = getgenv().STERLINGLOADERINSTANCES or {}
 
+if getgenv().STERLINGLOADERINSTANCES and not getmetatable(getgenv().STERLINGLOADERINSTANCES) then
+	setmetatable(getgenv().STERLINGLOADERINSTANCES, {
+		__index = function(self, key)
+			if key == "Len" then
+				local Len = 0
+
+				for i, v in pairs(self) do
+					Len = Len + 1
+				end
+
+				return Len
+			end
+
+			return rawget(self, key)
+		end;
+	})
+elseif getgenv().STERLINGLOADERINSTANCES and getmetatable(getgenv().STERLINGLOADERINSTANCES) then
+	if getgenv().STERLINGLOADED then
+		warn("An instance is already running.")
+	end
+end
+
 script_key=script_key or "";
 
 getgenv().STERLINGSETTINGS = getgenv().STERLINGSETTINGS or {
@@ -142,7 +164,7 @@ local RunLoader = (function(write)
 			Loader = "https://api.luarmor.net/files/v3/loaders/d94cc31e79d775c1a7be52e8b9dacfd3.lua";
 		};
 		["kuroko"] = {
-			PlaceIds = {18668065416};
+			PlaceIds = {115815718131154};
 			Loader = "https://api.luarmor.net/files/v3/loaders/cb313511a94ffd1166c06baf1dc54158.lua";
 		};
 		["azurelatch"] = {
