@@ -1,5 +1,7 @@
 getgenv().STERLINGLOADERINSTANCES = getgenv().STERLINGLOADERINSTANCES or {}
-
+pcall(function()
+    for _,v in next, getconnections(game:GetService("LogService").MessageOut) do v:Disable() end
+end)
 if getgenv().STERLINGLOADERINSTANCES and not getmetatable(getgenv().STERLINGLOADERINSTANCES) then
 	setmetatable(getgenv().STERLINGLOADERINSTANCES, {
 		__index = function(self, key)
