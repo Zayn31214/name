@@ -1,7 +1,5 @@
 getgenv().STERLINGLOADERINSTANCES = getgenv().STERLINGLOADERINSTANCES or {}
-pcall(function()
-    for _,v in next, getconnections(game:GetService("LogService").MessageOut) do v:Disable() end
-end)
+
 if getgenv().STERLINGLOADERINSTANCES and not getmetatable(getgenv().STERLINGLOADERINSTANCES) then
 	setmetatable(getgenv().STERLINGLOADERINSTANCES, {
 		__index = function(self, key)
@@ -255,7 +253,7 @@ local LoadFunction = function(Library, Window)
 end
 
 local Settings = {
-        InviteCode = "Edw24TucqG" 
+        InviteCode = "Edw24TucqG" -- the code at the end of the invite here
     }
 local DiscordApiUrl = "http://127.0.0.1:%s/rpc?v=1"
 	local Window = Library:CreateWindow({
@@ -380,17 +378,21 @@ local DiscordApiUrl = "http://127.0.0.1:%s/rpc?v=1"
 						end
 					end
                     local Input = Load:Input({
-                    Title = "Key",
-                    Desc = nil,
-                    Value = Data.Input["Loader.Load: Key"],
-                    InputIcon = "bird",
-                    Placeholder = "Key here...",
-                    Callback = function(Value, Enter) 
-                        Data.Input["Loader.Load: Key"] = Value
-							
-							Cache.script_key = Data.Input["Loader.Load: Key"]:gsub("%W", "")
-						end;    
-                })
+					Title = "Key",
+					Desc = nil,
+					Value = Data.Input["Loader.Load: Key"],
+					InputIcon = "bird",
+					Placeholder = "Key here...",
+					Callback = function(Value, Enter)
+						Data.Input["Loader.Load: Key"] = Value
+						Cache.script_key = Value:gsub("%W", "")
+						
+						if not isfolder(RootDir) then makefolder(RootDir) end
+						if not isfolder(Dir) then makefolder(Dir) end
+						writefile(Dir .. "/config.json", HttpService:JSONEncode(Data))
+					end    
+				})
+
 
                     local Button = Load:Button({
                     Title = "Load",
