@@ -24,6 +24,8 @@ function GetGame()
         return "BBZ.lua"
     elseif ID == 139598620873181 then
         return "Mugen.lua"
+    elseif ID == 137628283909891 then
+        return "Goalbound.lua"
     else
         print("Game is not supported.")
         return nil
